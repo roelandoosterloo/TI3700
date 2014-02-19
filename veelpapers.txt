@@ -1,0 +1,15 @@
+Vanuit TU-netwerk
+User Modelling for News Web Sites with Word Sense Based Techniques - B Magnini
+Gumo – The General User Model Ontology
+
+Gevonden
+http://www.l3s.de/~herder/research/papers/2011/cross_system_user_modeling_and_personalization.pdf
+http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.125.343&rep=rep1&type=pdf
+http://www.di.uniba.it/avi2004/e4pia/EPIA2004_proceedings.pdf#page=42
+http://pages.cs.wisc.edu/~akella/CS740/S11/740-Papers/BEN%2B09.pdf
+http://www.di.uniba.it/avi2004/e4pia/EPIA2004_proceedings.pdf#page=42
+http://eprints.soton.ac.uk/266551/2/szomszor_ISWC2008.pdf
+http://www.di.unito.it/~cgena/pdf/riviste/2-rivista.pdf
+http://www.di.unito.it/~cgena/pdf/lectureNotes-conferenzeInternazionali/kes2007.pdf
+http://ceur-ws.org/Vol-298/paper4.pdf
+http://multiwordnet.fbk.eu/paper/WordnetWum.pdf
