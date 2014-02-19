@@ -2,6 +2,8 @@ Hoofdvraag:
 	Wat zijn de verschillende methodes van analyse op twitter data?
 
 Deelonderwerpen:
-	1. User profiling
+	1. User profiling/Classification
 		Analyzing User Modeling on Twitter for Personalized News Recommendations, F. Abel, Q. Gao, G.J. Houben, K. Tao, in: User Modeling, Adaptation and Personalization, UMAP 2011, Girona, Spain, July 11-15, 2011, p. 1-12, 2011, Springer LNCS 6787.
-	2.
+	2. Frameworks
+
+	3. 
