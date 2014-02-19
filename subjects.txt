@@ -1,5 +1,5 @@
 Hoofdvraag: 
-	Wat zijn de verschillende methode van analyse op twitter data?
+	Wat zijn de verschillende methodes van analyse op twitter data?
 
 Deelonderwerpen:
 	1. User profiling
