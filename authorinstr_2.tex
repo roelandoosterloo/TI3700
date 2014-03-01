@@ -9,7 +9,7 @@
 
 %% begin document with title, author and affiliations
 
-\title{Seminarium IN3130\\ Title goes here}
+\title{Seminarium TI 3700\\ Data Analysis on Twitter: An Overview (working title)}
 \author{A. Hambenne  \and
     O. Maas \and
     R. Oosterloo}
@@ -78,8 +78,9 @@ After the clustering a number of features is used to distinguish between event a
 With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit"(TODO), in the second classifier the  Naive-Bayes technique is used. According to \cite{eventident} the first classifier outperforms the second classifier in the separation of event and non-event clusters. 
 \\\\
 \textbf{Aligning Tweets with an Event} \\
-On average thousands of tweets are sent using Twitter(bron) every minute. One of the main challenges in Event Identification is the alignment of tweets with their respective event. \cite{eventalign} tries to create an automated mapping solution for this problem using semantics.  
-
+On average thousands of tweets are sent every minute using Twitter(bron) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. \cite{eventalign} tries to create an automated mapping solution for this problem using semantics.  
+Twitter exposes the data using different formats such as JSON \& XML. To make this data more machine readable \cite{eventalign} enrich the data with sematics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of \cite{eventalign}. 
+TODO
 \section{Conclusion}
 
 \bibliographystyle{plain}
