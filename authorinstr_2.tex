@@ -57,16 +57,14 @@ This is the abstract of my paper.
 \subsection{Tag based analysis}
 \subsection{Event identification}
 \subsubsection{What is Event Identification}
-Event identification is the problem of identifying events(e.g. concerts, festivals \& incidents) in a twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information spreading information earlier than 'old' media.
+Event identification is the problem of identifying events(e.g. concerts, festivals \& incidents) in a twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers \& News Sites)
 
-To identify an event, a definition of an event is needed. \cite{eventident} defines an event as: "a real world occurence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the
+To identify an event using an algorithm, a definition of an event is needed. \cite{eventident} defines an event as: "a real world occurence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the
 occurrence and published during time $T_e$."
 
 \subsubsection{Event Identification Issues}
-
-\textbf{Aligning Tweets with an Event} \\
-On average thousands of tweets are sent using Twitter every minute. One of the main challenges in Event Identification is the alignment of tweets with their respective event. 
-\\\\
+In this section we will discuss several issues regarding Event Identification and the solutions associated with them.
+\\\\ 
 \textbf{Separation of Event and Non-event Content}\\
 Because not all tweets on twitter are event content, a seperation of Event and Non-event content is done prior of identifying events. To achieve this separation, \cite{eventident} uses an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing twitter-environment.
 
@@ -77,7 +75,11 @@ After the clustering a number of features is used to distinguish between event a
   \item Topical: Tweets about events tend to center more around one central topic. Furthermore messages in event clusters are more likely to share one or more event-specific key-terms.  
   \item Twitter-centric: TODO
 \end{itemize}
-With this list of features a two event classifier is trained using two different techniques. The first classifier is trained using the "WEKA tookit"(TODO), in the second classifier the  Naive-Bayes technique is used. According to \cite{eventident} the first classifier outperforms the second classifier in the separation of event and non-event clusters. 
+With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit"(TODO), in the second classifier the  Naive-Bayes technique is used. According to \cite{eventident} the first classifier outperforms the second classifier in the separation of event and non-event clusters. 
+\\\\
+\textbf{Aligning Tweets with an Event} \\
+On average thousands of tweets are sent using Twitter(bron) every minute. One of the main challenges in Event Identification is the alignment of tweets with their respective event. \cite{eventalign} tries to create an automated mapping solution for this problem using semantics.  
+
 \section{Conclusion}
 
 \bibliographystyle{plain}
