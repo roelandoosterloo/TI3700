@@ -56,7 +56,7 @@ This is the abstract of my paper.
 \subsection{Classification}
 \subsection{Tag based analysis}
 \subsection{Event identification}
-\subsubsection{What is Event Identification}
+
 Event identification is the problem of identifying events(e.g. concerts, festivals \& incidents) in a twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers \& News Sites)
 
 To identify an event using an algorithm, a definition of an event is needed. \cite{eventident} defines an event as: "a real world occurence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the
@@ -70,17 +70,36 @@ Because not all tweets on twitter are event content, a seperation of Event and N
 
 After the clustering a number of features is used to distinguish between event and non-event clusters. The following features are used by \cite{eventident} to identify an event cluster. 
 \begin{itemize}
-  \item Temporal: TODO
+	%TODO Temporal en Twittercentric uitwerken.
+  \item Temporal:
   \item Social: The interactions between users(e.g. retweets, replies \& mentions) during events could differ from other activities. 
   \item Topical: Tweets about events tend to center more around one central topic. Furthermore messages in event clusters are more likely to share one or more event-specific key-terms.  
-  \item Twitter-centric: TODO
+  \item Twitter-centric: 
 \end{itemize}
-With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit"(TODO), in the second classifier the  Naive-Bayes technique is used. According to \cite{eventident} the first classifier outperforms the second classifier in the separation of event and non-event clusters. 
+%TODO Weka toolkit uitzoeken
+With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit", in the second classifier the  Naive-Bayes technique is used. According to \cite{eventident} the first classifier outperforms the second classifier in the separation of event and non-event clusters. 
 \\\\
 \textbf{Aligning Tweets with an Event} \\
-On average thousands of tweets are sent every minute using Twitter(bron) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. \cite{eventalign} tries to create an automated mapping solution for this problem using semantics.  
-Twitter exposes the data using different formats such as JSON \& XML. To make this data more machine readable \cite{eventalign} enrich the data with sematics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of \cite{eventalign}. 
-TODO
+On average thousands of tweets are sent every minute using Twitter(bron) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. \cite{eventalign} tries to create an automated mapping solution for this problem using semantics.
+
+At first the data is enriched, Twitter exposes the data using different formats such as JSON \& XML. To make this data more machine readable \cite{eventalign} enrich the data with sematics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of \cite{eventalign}.
+
+%TODO misschien wat meer info over het semantic web toevoegen.
+After this process \cite{eventalign} uses multiple techniques to align a tweet with the respective event. The first technique used by \cite{eventalign} is Feature Extraction. Three featuresets are used:
+\begin{itemize}
+%TODO uitwerken
+  \item Immediate Resource Leaves: TODO
+  \item 1-Step Resource Leaves 
+  \item DBPedia Concepts 
+\end{itemize}
+%TODO afmaken
+
+\subsubsection{Usecase: Earthquake Detection}
+In \cite{earthq} a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} considers twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
+
+To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. 
+
+With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore \cite{earthq}'s system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
 \section{Conclusion}
 
 \bibliographystyle{plain}
