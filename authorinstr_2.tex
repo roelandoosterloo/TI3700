@@ -43,12 +43,24 @@ This is the abstract of my paper.
 \section{Data}
 
 \subsection{Twitter API}
-
 \section{Single tweet analysis}
 In this section we will discuss the different types of analysis that can be done on one single tweet. This usually is also the basis for a analysis of a larger amount of tweets or even on a stream of tweets. 
 \subsection{Data enrichment}
-At the very basis of a tweet is data enrichment. Because the length of a tweet is restricted to 140 characters the users of Twitter use language in creative ways that sometimes make it, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans this is done by linking the information from the tweet to earlier acquired knowledge.\\
-Some tweets contain an URL, this makes it possible for a computer to create a context from the linked resource. This works 
+At the very basis of a tweet is data enrichment. Because the length of a tweet is restricted to 140 characters the users of Twitter use language in creative ways that sometimes make it, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans this is done by linking the information from the tweet to earlier acquired knowledge.
+\subsubsection{Data enrichment issues}
+The problem of linking tweets to another source of information poses the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweet is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times. \\
+Linking to just news articles narrows the problem significantly, however, actually linking the tweets and the new articles still is an issue. Abel et al. propose two main linking strategies, divided into five methods total.
+\begin{enumerate}
+\item \textbf{URL-based strategy}\\
+This strategy is based upon the observation that many tweets contains URLs. Usually these URLs refer to news articles the tweets are closely related to.
+	\subitem \textbf{Strict URL-based} defines an article and a tweet as related when the tweet contains an URL to that news article.
+	\subitem \textbf{Lenient URL-based}, this method is an extension of the strict URL-based method. This extension entails that if a tweet $t$ has a link to an article $a$, all tweets that are retweeting $t$ considered linked to $a$. The same counts for tweets that are in responds to $t$, they will also be linked to $n$.
+\item \textbf{Content-based strategy}
+	\subitem \textbf{Bag of words}, in this method a tweet is represented as a vector of word frequencies. For a news article we can do the same thing. To link an article to a tweet we need to calculate the similarity between the tweet and the article and pick the one with the highest similarity. The similarity is calculated by the $TF \times IDF$ (Term Frequency times Inverse Document Frequency): the number of times a word from the tweet occurs in a news article, multiplied by the logarithm of the total number of articles over the number of articles the word occurs in. 
+	\subitem \textbf{Hashtag-based} is based upon the same concept as the Bag of words method. The difference here is that we do not consider the words in the article but we are only interested in the hashtags in the tweet for our representation of the tweet.
+	\subitem \textbf{Entity-based} is also based upon the Bag of words method. The entity-based method does not consider words in an article. It relies on the entities that are mentioned in the article to make a vector to represent the article. 
+\end{enumerate}
+Using these method a broader context can be created. This still is not much more useful than the tweet on its own. For the article to be actually useful the topics of the articles have to be extracted. To do this Natural Language Processing and machine learning can be used to extract the entities from the article. OpenCalais\footnote{www.opencalais.com} is a web service that does just that. It returns not only the entities, it will also return facts and events hidden in the text, which will make the result much more useful.
 \subsection{Sentiment analysis}
 \subsection{Concept extraction}
 \subsection{Metadata analysis (opt)}
