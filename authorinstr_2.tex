@@ -39,10 +39,46 @@ This is the abstract of my paper.
 
 \section{Introduction}
 
+\newpage
 
 \section{Data}
 
 \subsection{Twitter API}
+
+When Twitter was conceived, the developers decided that to adopt an API (Application Specific Interface) for third party developers. This has proven to be very
+beneficial to both Twitter's popularity and alot of its users, including researchers.
+
+An overview of the API structure and some useful fields:
+\begin{enumerate}
+\item \textbf{Tweets} The short messages sent by users
+	\subitem \textbf{Coordinates} Retrieves the longitude and latitude position from where a specified tweet has been sent
+	\subitem \textbf{Entities} Retrieves the entities (url, hashtag, etc.) that are embedded into the tweet
+	\subitem \textbf{Lang} Retrieves the language in which a tweet has been sent
+	\subitem \textbf{User} Retrieves the user that sent a tweet
+\item \textbf{Users} The accounts that send tweets
+	\subitem \textbf{Description} Retrieves the description that the user defined for his account
+	\subitem \textbf{Location} Retrieves the location that the user defined for his account
+	\subitem \textbf{Status} Retrieves, if possible, the user's latest tweet
+\item \textbf{Entities} Images, hashtags and other entities that tweets can hold
+	\subitem \textbf{Hashtags} Retrieves the hashtags that have been parset out of a tweet
+	\subitem \textbf{Media} Retrieves the media that is associated with a tweet
+	\subitem \textbf{urls} Retrieves the urls embedded in a tweet
+	\subitem \textbf{user\_mentions} Retrieves the users that have been mentioned in a tweet
+\item \textbf{Places} Predefined places on Twitter that users can associate with
+	\subitem \textbf{Country} Retrieves the country associated with a place
+	\subitem \textbf{Full\_name} Retrieves the full name of a place, for example Kanses ``City, Kansas''
+	\subitem \textbf{Place\_type} Retrieves the type of a place, for example ``city''
+\end{enumerate}
+
+When the above fields are combined, it is possible to create sets of Tweets that fulfill a certain specification. These sets can be used to extract information.
+No matter how specific you can define your search, sometimes you need a random sample of tweets to analyse. For this purpose, Twitter has a stream that
+third party developers can tap into to retrieve random tweets. Unfortunately, the Twitter stream can only retrieve tweets that are less than a few days old.
+
+The following of this article describes algorithms that dive into the big data of Twitter, how to extract useful information from the tweets, and what the information
+can be applied to.
+
+\newpage
+
 \section{Single tweet analysis}
 In this section we will discuss the different types of analysis that can be done on one single tweet. This usually is also the basis for a analysis of a larger amount of tweets or even on a stream of tweets. 
 \subsection{Data enrichment}
@@ -108,9 +144,10 @@ which make them hold interesting information about both the tweet and the user t
 \begin{enumerate}
 \item \textbf{Linear-Weighted Hybrid}\\
 
-%TODO: Technische stuff begrijpen zodat ik die hier neer kan zetten
+%TODO: Technische stuff begrijpen zodat ik die hier neer kan zetten + bibliography laten doorverwijzen
 
-\item \textbf{Pair-Wise Interaction Tensor Factorization}
+\item \textbf{Pair-Wise Interaction Tensor Factorization} The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has
+been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter.
 	
 \end{enumerate}
 
@@ -159,7 +196,12 @@ In \cite{earthq} a usecase for Event Identification is presented in the form of 
 To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. 
 
 With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore \cite{earthq}'s system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
+
+\newpage
+
 \section{Conclusion}
+
+\newpage
 
 \bibliographystyle{plain}
 \bibliography{bibdb}
