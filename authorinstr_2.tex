@@ -48,7 +48,8 @@ In this section we will discuss the different types of analysis that can be done
 \subsection{Data enrichment}
 At the very basis of a tweet is data enrichment. Because the length of a tweet is restricted to 140 characters the users of Twitter use language in creative ways that sometimes make it, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans this is done by linking the information from the tweet to earlier acquired knowledge.
 \subsubsection{Data enrichment issues}
-The problem of linking tweets to another source of information poses the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweet is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times. \\
+The problem of linking tweets to another source of information poses the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweet is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times.
+
 Linking to just news articles narrows the problem significantly, however, actually linking the tweets and the new articles still is an issue. Abel et al. propose two main linking strategies, divided into five methods total.
 \begin{enumerate}
 \item \textbf{URL-based strategy}\\
@@ -61,7 +62,24 @@ This strategy is based upon the observation that many tweets contains URLs. Usua
 	\subitem \textbf{Entity-based} is also based upon the Bag of words method. The entity-based method does not consider words in an article. It relies on the entities that are mentioned in the article to make a vector to represent the article. 
 \end{enumerate}
 Using these method a broader context can be created. This still is not much more useful than the tweet on its own. For the article to be actually useful the topics of the articles have to be extracted. To do this Natural Language Processing and machine learning can be used to extract the entities from the article. OpenCalais\footnote{www.opencalais.com} is a web service that does just that. It returns not only the entities, it will also return facts and events hidden in the text, which will make the result much more useful.
+\newpage
 \subsection{Sentiment analysis}
+Sentiment analysis or opinion mining is "a linguistic analysis technique where a body of text is examined to characterize the tonality of the document."\footnote{http://lexicon.ft.com/Term?term=sentiment-analysis} In other words, the goal of a sentiment analysis is to extract the writers opinion on some topic from a body of text. This body of text can very well be a tweet, and that combined with the popularity of microblogging amongst internet users, gives a very interesting body of knowledge. But in order to get to that knowledge the data has to be analyzed fist. 
+The most important and most obvious issue is how to extract an opinion from a tweet. In the next part we will discuss a few ways to extract an opinion from a tweet.
+\subsubsection{Semantics }
+The most important way to extract a sentiment from a tweet is by analyzing the semantics. After all, tweets are written text. The tweets can be labeled using machine learning algorithms. Pang et al. \cite{machineLearning} have done a comparative study of three standard machine learning algorithms: 
+\begin{enumerate}
+\item \textbf{Naive Bayes} is a fair simple classifier that operates under the assumption that the presents or absence of features does not relate to the presents of other features. If we apply that on Twitter we would get $c = \arg\max_{c\in C} P(c|w)$ where $c$ is a sentiment class, $C$ the collection of sentiment classes and $w$ is a tweet. \cite{sentAnalysis}
+\item \textbf{Maximum Entropy} is a model that, unlike Bayes, does not make an independence assumption. It operates under the philosophy that "we should choose the model making the fewest assumptions about the data while still remaining consistent with it".\cite{machineLearning} \\
+The formula is of the form $P(c|d) = \frac{1}{Z(d)}\exp(\Sigma_i \lambda_{i,c}F_{i,c}(d,c))$, where $Z(d)$ is a normalization function, $\lambda_{i,c}$ a weighted vector determining the significance of the feature and $F_{i,c}$ is a class/feature function. 
+\item \textbf{Support Vector Machine} is fundamentally different from Naive Bayes and Max Entropy because it is not a probabilistic model. The basic idea behind a support vector machine is that a vector is trained to separate the sentiments. Not only will it separate the training data, it will do so at the largest possible margin. 
+%TODO write more shit
+\end{enumerate}
+
+
+
+
+\newpage
 \subsection{Concept extraction}
 \subsection{Metadata analysis (opt)}
 
