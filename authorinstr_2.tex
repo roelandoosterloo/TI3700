@@ -72,7 +72,11 @@ Using these method a broader context can be created. This still is not much more
 User classification is the problem of classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In this chapter we will discuss some issues concerning User Classification and some use-cases. 
 
 \subsubsection{User Classification Issues}
-\textbf{Context}
+\textbf{Context}\\
+To classify users on their tweets is it useful to extract the context of the content of a tweet. Some hashtag $x$ could have a different context in two tweets. So extra information about the content of a tweet is needed. For instance \cite{userclasst} uses mentions of (members of) political parties to deduce if a certain hashtag is used in a political context. 
+\\\\
+\textbf{Profile}\\
+Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. According to \cite{usermachine} 80\% of the users provide a location and 48\% of the users provide a short bio. Furthermore etnicity and gender are far more difficult to extract. 
 \subsection{Tag based analysis}
 \subsection{Event identification}
 
