@@ -127,14 +127,24 @@ Other than semantical analysis we can also use other data from tweets. A good se
 \subsection{Statistics}
 \subsection{User Modelling}
 \subsection{User Classification}
-User classification is the problem of classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In this chapter we will discuss some issues concerning User Classification and some use-cases. 
+User classification is the problem of classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In this chapter we will discuss some features used to classify users and some use-cases. 
 
-\subsubsection{User Classification Issues}
-\textbf{Context}\\
-To classify users on their tweets is it useful to extract the context of the content of a tweet. Some hashtag $x$ could have a different context in two tweets. So extra information about the content of a tweet is needed. For instance \cite{userclasst} uses mentions of (members of) political parties to deduce if a certain hashtag is used in a political context. 
+\subsubsection{Classification Features}
+To classify users a set of features is needed to distinguish between users. In this section we will present a list of frequently used features to classify users.  
+\\\\
+\textbf{Linguistics}\\
+TODO
+\\\\
+\textbf{Interaction Profiles}\\
+Users interaction profiles is a profile created by \cite{pol} to capture interactions between users and other accounts. An interaction is a retweet or a reply. \cite{usermachine} also uses friend accounts as a measurement in interaction between users. A friend account of user $x$ is an account that is followed by user $x$.
+\\\\
+\textbf{Tweeting Behavior}\\
+Tweeting behavior is a set of characteristics which shows us the way a users interacts with twitter. Things like the average number of messages, number of replies \& number of friends seems a good quantifier for classification. According to \cite{usermachine} these features are useful but not really discriminative. 
 \\\\
 \textbf{Profile}\\
-Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. According to \cite{usermachine} 80\% of the users provide a location and 48\% of the users provide a short bio. Furthermore etnicity and gender are far more difficult to extract. 
+Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. According to \cite{usermachine} 80\% of the users provide a location and 48\% of the users provide a short bio. Furthermore \cite{usermachine} was able to extract a gender for 80\% of the users, but with a very low accuracy. \cite{usermachine} also researched the profile picture/avatar of twitter users. They found out that these pictures can often be misleading as 20\% of the found profile pictures was not the owner but another person such as a celebrity. 
+
+\subsubsection{Usecase: Predicting Political Preferences}
 
 \subsection{Tag based analysis}
 
