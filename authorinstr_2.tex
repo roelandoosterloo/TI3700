@@ -213,8 +213,7 @@ After this process \cite{eventalign} uses multiple techniques to align a tweet w
   \item 1-Step Resource Leaves: Use all literals and resources within 1 step from the URI of an event. 
   \item DBPedia Concepts: Also uses all the concepts from DBPedia 
 \end{itemize}
-%TODO afmaken
-
+After this a Feature Vector is composed, for tweets all stop words are removed from the bag of words a tweet is represented as. Furthermore all stopwords are removed and everything is normalized to lowercase. \cite{eventalign} Then a labeling function is used to label the event. 
 \subsubsection{Usecase: Earthquake Detection}
 In \cite{earthq} a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} considers twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
 
