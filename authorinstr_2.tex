@@ -39,7 +39,8 @@ This is the abstract of my paper.
 
 \section{Introduction}
 
-Microblogging has grown out to be one of the most interesting forms of social media. One of its most popular implementations has to be Twitter, where users can share short messages, called Tweets, with any other user. The limitation of 140 characters per Tweet forces users to compress all their information into a small message, making them extra interesting to analyze. These Tweets often contain information broadcasted by the user in the form of opinions, emotions, interests, etc. One of the biggest challenges is finding a way to extract the intended information from these Tweets. Once the information is extracted however, the possible applications are endless. This paper is dedicated to giving an overview of successful techniques and useful applications of these social web data analytics. In the following section, Twitter's API gets introduced which will show that the platform already offers great tools and commands to retrieve specific datasets, or a completely random sample stream of Tweets. After that, two entire sections will be dedicated to all sorts of techniques that are being used to extract and analyze this information. The first section will focus on single tweets, and the second section is focused on sets of multiple Tweets. Both of these sections will involve several usecases for certain techniques.
+Microblogging has grown out to become one of the most interesting forms of social media. Its most popular implementation has to be Twitter, where users can share short messages, called Tweets, with any other user. The limitation of 140 characters per Tweet forces users to compress all their information into a small message, making them extra interesting to analyze. These Tweets often contain information broadcasted by the user in the form of opinions, emotions, interests, etc. One of the biggest challenges is finding a way to extract the intended information from these Tweets. Once the information is extracted however, the possible applications are endless. This paper is dedicated to giving an overview of successful techniques and useful applications of these social web data analytics. In the following section, Twitter's API gets introduced which will show that the platform already offers great tools and commands to retrieve specific datasets, or a completely random sample stream of Tweets. After that, 
+two entire sections will be dedicated to all sorts of techniques that are being used to extract and analyze this information. The first section will focus on single tweets, and the second section is focused on sets of multiple Tweets. Both of these sections will involve several usecases for certain techniques.
 
 %TODO: Add what the conclusion will say
 
@@ -48,10 +49,9 @@ Microblogging has grown out to be one of the most interesting forms of social me
 
 \subsection{Twitter API}
 
-When Twitter was founded, the creators chose to adopt an API (Application Specific Interface) for third party developers. This has proven to be very
-beneficial to both Twitter's popularity and a lot of its users, including researchers.
+When Twitter was founded, the creators chose to adopt an API (Application Programming Interface) for third party developers. This has proven to be very
+beneficial to both Twitter's popularity and a lot of its users, including researchers. An overview of the API structure and some useful fields\cite{TwitterDev}:
 
-An overview of the API structure and some useful fields:
 \begin{enumerate}
 \item \textbf{Tweets} The short messages consisting of 140 characters sent by users
 	\subitem \textbf{coordinates} Returns the longitude and latitude position from where a specified tweet has been sent
@@ -83,7 +83,8 @@ In this section we will discuss the different types of analysis that can be done
 \subsection{Data enrichment}
 At the very basis of the analysis of a tweet is data enrichment. Because the length of a tweet is restricted to 140 characters, the users of Twitter use language in creative ways. This way of communicating makes it sometimes, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans this is done by linking the concepts from the tweet to earlier acquired knowledge. The same thing can be done by computers. Two stages can be defined in this process, first the extraction of the concepts from the tweet, after that a context can be created by linking the tweet to other sources.
 \subsubsection{Concept extraction}
-In this case by concepts we mean named entities such as names of locations, people and organizations. To recognize these entities multiple learning algorithms or even combinations of learning algorithms have been proposed. The most common are the statistical learning algorithms. Think of algorithms like Maximum Entropy Models, Hidden Markov Models or neural networks. Other proposed algorithms are AdaBoost.MH, employed memory-based learning, transformation-based learning, support vector machines and conditional random fields. All of them in decreasing frequency of use.\cite{EntityRecognition} Florian et al. have shown that combining multiple classifiers can increase the performance, compared to the best performing classifier, by 17-21 \%.\cite{ClassifierCombination} After the entities have been found, labels are assigned to distinguish between a person, an organization or a location. These labels on its own are not worth a lot. They can be used in an application that is build to handle these labels. Therefore Abel et al. propose to use the RDF.\cite{AdaptiveSearch} By doing so sources from the Semantic Web (e.g. DBpedia \footnote{http://dbpedia.
+In this case by concepts we mean named entities such as names of locations, people and organizations. To recognize these entities multiple learning algorithms or even combinations of learning algorithms have been proposed. The most common are the statistical learning algorithms. Think of algorithms like Maximum Entropy Models, Hidden Markov Models or neural networks. Other proposed algorithms are AdaBoost.MH, employed memory-based learning, transformation-based learning, support vector machines and conditional random fields. All of them in decreasing frequency of use.\cite{EntityRecognition} Florian et al. have shown that combining multiple classifiers can increase the performance, compared to the best performing classifier, by 17-21 \%.\cite{ClassifierCombination} After the entities have been found, labels are assigned to distinguish between a person, an organization or a location. These labels on its own are not worth a lot. They can be used in an application that is build to handle these labels. Therefore 
+Abel et al. propose to use the RDF.\cite{AdaptiveSearch} By doing so sources from the Semantic Web (e.g. DBpedia \footnote{http://dbpedia.
 org/}) can now be leveraged to enrich the data. Another advantage of using RDF is that RDF is a Semantic Web standard recommended by the W3C\footnote{http://www.w3.org/RDF/}. Because W3C recommends to use this model, most likely a lot of other sources also use this model. This will give a much bigger knowledge base to enrich the data from.
 
 The whole process of building a system to extract concept from a tweet seems to be a lot of work. Fortunately there are services like OpenCalais\footnote{www.opencalais.com}. OpenCalais is a web service that can extract concepts. Not only does it return the entities, it will also return facts and events hidden in the text, which will make the result even more useful.
@@ -167,7 +168,7 @@ To classify the users a one vs all classifier is trained. (Which will recorgnize
 
 Twitter allows their users to contribute their own social annotations to their tweets in the form of tags. These tags can be arbitrarily generated by users 
 which make them hold interesting information about both the tweet and the user that posted it. There are two dominant techniques that are currently being
-used by researchers to model the information of tagged based analysis, The Linear-Weighted Hybrid Model, and the Pair-wise Interaction Tensor Factorisation Model.
+used by researchers to model the information of tagged based analysis, The Linear-Weighted Hybrid Model, and the Pair-wise Interaction Tensor Factorisation Model\cite{TagBased}.
 
 \begin{enumerate}
 \item \textbf{Linear-Weighted Hybrid}\\
@@ -193,19 +194,19 @@ of the specialised tensor factorization:
 
 $M = U_k R_k^U + T_k R_k^T$
 
-With 
-\begin{enumerate}
+Where 
+\begin{itemize}
  \item $U_k$ the user factorization
  \item $T_k$ is the tag factor matrix
  \item $R_k^U$ is the resource factor matrix with respect to the users
  \item $R_k^T$ is the resource factor matrix with respect to the tags
  \item $k$ selected number of factors
  \item $M$ the personalized resource-ranking tensor
-\end{enumerate}
+\end{itemize}
 
 The relevance score of a resource can now be calculated by:
 
-$\phi (u, \{t\}, r) = \sum_{i=1}^k U_k\{u\}\{i\}R_k^U\{r\}\{i\} + T_k\{t\}\{i\}R_k^T\{r\}\{i\}$	
+$\phi (u, \{t\}, r) = \sum_{i=1}^k U_k[u][i]R_k^U[r][i] + T_k[t][i]R_k^T[r][i]$	
 \end{enumerate}
 
 
