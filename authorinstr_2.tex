@@ -200,41 +200,30 @@ The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm t
 been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter. 
 The adaptation involves changing the roles of resources and tags with respect to each other.
 	
+This model is restricted in a way because its output is a set of matrices that illustrates a special case of the Tucker decomposition of a tensor. 
+The tensor is not directly linked to the dataset, but rather implies a ranking. It is therefor only useful in the case of tag-based resource recommendation, 
+and not for resource recommendations with other requirements.
 	
-	
-	
+To build the model, the data has to be observed in the form $(u, r+, r-, t)$ where $(u, r+, t)$ and $(u, r-, t)$ is a triple respectively
+found and not found in the dataset. A ranking function is then used to prefer positive examples over negative ones. An iterative gradient-descent
+algorithm is used to optimize this function. All four matrices will be updated until they converge. The matrices represent the factor-reduced components
+of the specialised tensor factorization:
 
-Our adaptation of the model to resource
-recommendation simply exchanges the roles of resources and tags with respect to each
-other. This model-based approach generates a set of factor matrices which resembles
-a special case of the Tucker decomposition of a tensor. The tensor itself is not directly
-induced by the data, but rather reflects a ranking over the resources for each user-tag
-pair. Thus, it is important to note that this model is applicable only to the special case of
-tag-based resource recommendation, and not for resource recommendation tasks with
-other requirements.
-The model is built by considering observations in the data of the form (u, r+ , r− , t),
-where (u, r+ , t) is a triple which is found in the data (a positive example of resource
-selection) and (u, r− , t) is a triple not found in the data (a negative example of re-
-source selection). An iterative gradient-descent algorithm is employed to optimize a116
-J. Gemmell et al.
-ranking function that prefers positive examples in the data over negative ones. Each of
-four related matrices is updated until convergence is found. The matrices represent the
-U
-T
-factor-reduced components of the specialized tensor factorization M = Uk Rk
-+Tk Rk
-,
-U
-where Uk is the user factor matrix, Tk is the tag factor matrix, Rk is the resource factor
-T
-matrix with respect to users and Rk
-is the resource factor matrix with respect to tags, k
-is the selected number of factors, and M is the personalized resource-ranking tensor.
-Generating a resource recommendation for a given user u and tag t is simply a
-matter of referring to the appropriate user-tag column of the ranking tensor M . The
-relevance score of a resource given a user-tag pair is calculated as: φ(u, {t}, r) =
-	
-	
+$M = U_k R_k^U + T_k R_k^T$
+
+With 
+\begin{enumerate}
+ \item $U_k$ the user factorization
+ \item $T_k$ is the tag factor matrix
+ \item $R_k^U$ is the resource factor matrix with respect to the users
+ \item $R_k^T$ is the resource factor matrix with respect to the tags
+ \item $k$ selected number of factors
+ \item $M$ the personalized resource-ranking tensor
+\end{enumerate}
+
+The relevance score of a resource can now be calculated by:
+
+$\phi (u, \{t\}, r) = \sum_{i=1}^k U_k\{u\}\{i\}R_k^U\{r\}\{i\} + T_k\{t\}\{i\}R_k^T\{r\}\{i\}$	
 \end{enumerate}
 
 
