@@ -149,18 +149,18 @@ To classify users a set of features is needed to distinguish between users. In t
 Linguistics can say a lot about the interests of a user. To classify a user Prototipical Words(PW's) can be used.  \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. In a twitter-context also Prototipical Hashtags can be used.
 \\\\
 \textbf{Interaction Profiles}\\
-Users interaction profiles is a profile created by \cite{pol} to capture interactions between users and other accounts. An interaction is a retweet or a reply. \cite{usermachine} also uses friend accounts as a measurement in interaction between users. A friend account of user $x$ is an account that is followed by user $x$.  %TODO read this over, second sentence unclear 
+Users interaction profiles is a profile created by Makazhanov \& Raﬁei to capture interactions between users and other accounts. \cite{pol} An interaction is a retweet or a reply. Pennacchiotti \& Popescu also uses friend accounts as a measurement in interaction between users. \cite{usermachine}  A friend account of user $x$ is an account that is followed by user $x$.  %TODO read this over, second sentence unclear 
 \\\\
 \textbf{Tweeting Behavior}\\
-Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Things like the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to \cite{usermachine} these features are useful but not really discriminative. 
+Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Things like the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to Pennacchiotti \& Popescu these features are useful but not really discriminative. \cite{usermachine}
 \\\\
 \textbf{Profile}\\
-Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. According to \cite{usermachine} 80\% of the users provides a location and 48\% of the users provides a short bio. Furthermore \cite{usermachine} was able to extract a gender for 80\% of the users, but with a very low accuracy. \cite{usermachine} also researched the profile picture/avatar of twitter users. They found out that these pictures can often be misleading as 20\% of the found profile pictures was not the owner but another person such as a celebrity. 
+Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. According to Pennacchiotti \& Popescu  80\% of the users provides a location and 48\% of the users provides a short bio. \cite{usermachine} Furthermore their were able to extract a gender for 80\% of the users, but with a very low accuracy. They also researched the profile picture/avatar of twitter users and found out that these pictures can often be misleading. 20\% of the found profile pictures was not the owner but another person such as a celebrity. \cite{usermachine}
 
 \subsubsection{Usecase: Predicting Political Preferences}
-During election time it can be useful to predict the political preferences of a user. In \cite{pol} a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. 
+During election time it can be useful to predict the political preferences of a user. In Makazhanov \& Raﬁei's paper a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. \cite{pol}
 
-To achieve this (political) hashtags in combination with twitter activities is used. To know if a user mentions an account of an election candidate \cite{pol} semi-automatically scraped a number of these accounts. Furthermore they collected 181972 tweets about politics, before processing these tweets non-personal and spam accounts had to be filtered.
+To achieve this (political) hashtags in combination with twitter activities is used. To know if a user mentions an account of an election candidate Makazhanov \& Raﬁei semi-automatically scraped a number of these accounts. Furthermore they collected 181972 tweets about politics, before processing these tweets non-personal and spam accounts had to be filtered. \cite{pol}
 
 To classify the users a one vs all classifier is trained. (Which will recorgnize one party vs all other parties.) After this all information is combined to predict a political party for each user. 
 \subsection{Tag based analysis}
@@ -213,15 +213,15 @@ $\phi (u, \{t\}, r) = \sum_{i=1}^k U_k\{u\}\{i\}R_k^U\{r\}\{i\} + T_k\{t\}\{i\}R
 
 Event identification is the problem of identifying events(e.g. concerts, festivals and incidents) in a twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers and News Sites).
 
-To identify an event using an algorithm, a definition of an event is needed. \cite{eventident} defines an event as: "a real world occurrence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the occurrence and published during time $T_e$."
+To identify an event using an algorithm, a definition of an event is needed. Becker et al.  define an event as: "a real world occurrence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the occurrence and published during time $T_e$." \cite{eventident} 
 
 \subsubsection{Event Identification Issues}
 In this section we will discuss several issues regarding Event Identification and the solutions associated with them.
 \\\\ 
 \textbf{Separation of Event and Non-event Content}\\
-Because not all tweets on twitter are event content, a separation of Event and Non-event content is done prior of identifying events. To achieve this separation, \cite{eventident} uses an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing twitter-environment.
+Because not all tweets on twitter are event content, a separation of Event and Non-event content is done prior of identifying events. To achieve this separation, Becker et al.  use an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing twitter-environment. \cite{eventident} 
 
-After the clustering a number of features is used to distinguish between event and non-event clusters. The following features are used by \cite{eventident} to identify an event cluster. 
+After the clustering a number of features is used to distinguish between event and non-event clusters. The following features are used by Becker et al. to identify an event cluster. \cite{eventident} 
 \begin{itemize}
   \item Temporal: The characteristics of the volume over the time $T_e$ associated with an event. 
   \item Social: The interactions between users(e.g. retweets, replies and mentions) during events could differ from other activities. 
@@ -229,16 +229,16 @@ After the clustering a number of features is used to distinguish between event a
   \item Twitter-centric: Some activities behave like an event but are Twitter-centric.(e.g. Tweets like 'Goodmorning!') These activities need to be filtered. 
 \end{itemize}
 
-With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit"\footnote{http://www.cs.waikato.ac.nz/ml/weka/}, in the second classifier the  Naive-Bayes technique is used. According to \cite{eventident} the first classifier outperforms the second classifier in the separation of event and non-event clusters. 
+With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit"\footnote{http://www.cs.waikato.ac.nz/ml/weka/}, in the second classifier the  Naive-Bayes technique is used. According to Becker et al. the first classifier outperforms the second classifier in the separation of event and non-event clusters. \cite{eventident}
 \\\\
 \textbf{Aligning Tweets with an Event} \\
-On average thousands of tweets are sent every minute using Twitter(bron) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. \cite{eventalign} tries to create an automated mapping solution for this problem using semantics.
-%TODO source toevoegen!
+On average thousands of tweets are sent every minute using Twitter(\footnote{https://blog.twitter.com/2013/new-tweets-per-second-record-and-how}) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. Rowe \& Stankovic try to create an automated mapping solution for this problem using semantics. \cite{eventalign}
 
-At first the data is enriched, Twitter exposes the data using different formats such as JSON and XML. To make this data more machine readable \cite{eventalign} enrich the data with semantics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of \cite{eventalign}.
+
+At first the data is enriched, Twitter exposes the data using different formats such as JSON and XML. To make this data more machine readable then they enrich the data with semantics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of Rowe \& Stankovic paper. \cite{eventalign}
 
 %TODO misschien wat meer info over het semantic web toevoegen.
-After this process \cite{eventalign} uses multiple techniques to align a tweet with the respective event. The first technique used by \cite{eventalign} is Feature Extraction. Three feature sets are used:
+After this process  Rowe \& Stankovic \cite{eventalign} uses multiple techniques to align a tweet with the respective event. The first technique used by them is Feature Extraction. \cite{eventalign} Three feature sets are used:
 \begin{itemize}
 %TODO uitwerken
   \item Immediate Resource Leaves: Use only the URI which are most indicative of an event. This feature only uses literals and resources within the URI of an event. 
@@ -247,12 +247,12 @@ After this process \cite{eventalign} uses multiple techniques to align a tweet w
 \end{itemize}
 After this a Feature Vector is composed, for tweets all stop words are removed from the bag of words a tweet is represented as. Furthermore all stopwords are removed and everything is normalized to lowercase. \cite{eventalign} Then a labeling function is used to label the event. 
 \subsubsection{Usecase: Earthquake Detection}
-In \cite{earthq} a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} considers twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
+In Sakaki et al. their paper a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} They consider twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
 
 To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. 
 
-With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore \cite{earthq}'s system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
-
+With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
+\cite{earthq}
 \newpage
 
 \section{Conclusion}
