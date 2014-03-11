@@ -39,6 +39,18 @@ This is the abstract of my paper.
 
 \section{Introduction}
 
+Microblogging has grown out to be one of the most interesting forms of social media. One of its most popular implementations has to be Twitter, where
+users can share short messages, called Tweets, with every other user. The limitation in characters forces users to 
+compress all their information into a small message, making them extra interesting to analyse. These Tweets often contain information broadcasted by the user in
+the form of opinions, emotions, interests, etc. One of the biggest challenges is finding a way to extract the intended information from these Tweets. Once
+the information is extracted however, the possible applications are endless. This paper is dedicated to combining succesful techniques and useful applications
+of these social web data analytics. In the following section, Twitters API gets introduced which will show that the platform already offers great tools
+and commands to retrieve specific datasets, or a completely random sample stream of Tweets. After that, two entire sections will be dedicated to all sorts
+of techniques that are being used to extract this information. One section will focus on single tweets, and the following on sets of multiple Tweets. Both
+of these sections will involve several usecases for certain techniques.
+
+%TODO: Add what the conclusion will say
+
 \newpage
 
 \section{Data}
@@ -182,8 +194,46 @@ All weights $\alpha_i$ are then computed by applying a random-restart hill climb
 gets created with random weights that sum to 1. The recommender then modifies the vector over the holdout set to train the algorithm until it reaches
 a stable point. The algorithm then restarts to avoid local minima.
 
-\item \textbf{Pair-Wise Interaction Tensor Factorization} The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has
-been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter.
+\item \textbf{Pair-Wise Interaction Tensor Factorization} 
+
+The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has
+been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter. 
+The adaptation involves changing the roles of resources and tags with respect to each other.
+	
+	
+	
+	
+
+Our adaptation of the model to resource
+recommendation simply exchanges the roles of resources and tags with respect to each
+other. This model-based approach generates a set of factor matrices which resembles
+a special case of the Tucker decomposition of a tensor. The tensor itself is not directly
+induced by the data, but rather reflects a ranking over the resources for each user-tag
+pair. Thus, it is important to note that this model is applicable only to the special case of
+tag-based resource recommendation, and not for resource recommendation tasks with
+other requirements.
+The model is built by considering observations in the data of the form (u, r+ , r− , t),
+where (u, r+ , t) is a triple which is found in the data (a positive example of resource
+selection) and (u, r− , t) is a triple not found in the data (a negative example of re-
+source selection). An iterative gradient-descent algorithm is employed to optimize a116
+J. Gemmell et al.
+ranking function that prefers positive examples in the data over negative ones. Each of
+four related matrices is updated until convergence is found. The matrices represent the
+U
+T
+factor-reduced components of the specialized tensor factorization M = Uk Rk
++Tk Rk
+,
+U
+where Uk is the user factor matrix, Tk is the tag factor matrix, Rk is the resource factor
+T
+matrix with respect to users and Rk
+is the resource factor matrix with respect to tags, k
+is the selected number of factors, and M is the personalized resource-ranking tensor.
+Generating a resource recommendation for a given user u and tag t is simply a
+matter of referring to the appropriate user-tag column of the ranking tensor M . The
+relevance score of a resource given a user-tag pair is calculated as: φ(u, {t}, r) =
+	
 	
 \end{enumerate}
 
