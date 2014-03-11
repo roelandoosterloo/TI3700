@@ -39,26 +39,17 @@ This is the abstract of my paper.
 
 \section{Introduction}
 
-Microblogging has grown out to be one of the most interesting forms of social media. One of its most popular implementations has to be Twitter, where
-users can share short messages, called Tweets, with every other user. The limitation in characters forces users to 
-compress all their information into a small message, making them extra interesting to analyse. These Tweets often contain information broadcasted by the user in
-the form of opinions, emotions, interests, etc. One of the biggest challenges is finding a way to extract the intended information from these Tweets. Once
-the information is extracted however, the possible applications are endless. This paper is dedicated to combining succesful techniques and useful applications
-of these social web data analytics. In the following section, Twitters API gets introduced which will show that the platform already offers great tools
-and commands to retrieve specific datasets, or a completely random sample stream of Tweets. After that, two entire sections will be dedicated to all sorts
-of techniques that are being used to extract this information. One section will focus on single tweets, and the following on sets of multiple Tweets. Both
-of these sections will involve several usecases for certain techniques.
+Microblogging has grown out to be one of the most interesting forms of social media. One of its most popular implementations has to be Twitter, where users can share short messages, called Tweets, with any other user. The limitation of 140 characters per Tweet forces users to compress all their information into a small message, making them extra interesting to analyze. These Tweets often contain information broadcasted by the user in the form of opinions, emotions, interests, etc. One of the biggest challenges is finding a way to extract the intended information from these Tweets. Once the information is extracted however, the possible applications are endless. This paper is dedicated to giving an overview of successful techniques and useful applications of these social web data analytics. In the following section, Twitter's API gets introduced which will show that the platform already offers great tools and commands to retrieve specific datasets, or a completely random sample stream of Tweets. After that, two entire sections will be dedicated to all sorts of techniques that are being used to extract and analyze this information. The first section will focus on single tweets, and the second section is focused on sets of multiple Tweets. Both of these sections will involve several usecases for certain techniques.
 
 %TODO: Add what the conclusion will say
 
-\newpage
 
 \section{Data}
 
 \subsection{Twitter API}
 
-When Twitter was conceived, the creators chose to adopt an API (Application Specific Interface) for third party developers. This has proven to be very
-beneficial to both Twitter's popularity and alot of its users, including researchers.
+When Twitter was founded, the creators chose to adopt an API (Application Specific Interface) for third party developers. This has proven to be very
+beneficial to both Twitter's popularity and a lot of its users, including researchers.
 
 An overview of the API structure and some useful fields:
 \begin{enumerate}
@@ -82,13 +73,9 @@ An overview of the API structure and some useful fields:
 	\subitem \textbf{place\_type} Returns the type of a place, for example ``city''
 \end{enumerate}
 
-When the above fields are combined, it is possible to create datasets of Tweets that fulfill a certain specification. 
-These sets can then be used to extract specific information. However, defining your own dataset may introduce a certain bias, 
-and sometimes you need a random sample of tweets to analyse. For this purpose, Twitter has a streaming function that
-third party developers can tap into to retrieve random tweets. Unfortunately, the Twitter stream can only retrieve tweets that are less than a few days old.
+When the above fields are combined, it is possible to create datasets of Tweets that fulfill a certain specification. These sets can then be used to extract specific information. However, defining your own dataset may introduce a certain bias, and sometimes you need a random sample of tweets to analyze. For this purpose, Twitter has a streaming function that third party developers can tap into to retrieve random tweets. Unfortunately, the Twitter stream can only retrieve tweets that are less than a few days old.
 
-The following of this article describes algorithms that dive into the big data of Twitter, how to extract useful information from the tweets, and what the information
-can be applied to.
+The following of this paper describes algorithms that dive into the big data of Twitter, how to extract useful information from the tweets, and what the information can be applied to.
 
 
 \section{Single tweet analysis}
@@ -96,32 +83,34 @@ In this section we will discuss the different types of analysis that can be done
 \subsection{Data enrichment}
 At the very basis of the analysis of a tweet is data enrichment. Because the length of a tweet is restricted to 140 characters, the users of Twitter use language in creative ways. This way of communicating makes it sometimes, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans this is done by linking the concepts from the tweet to earlier acquired knowledge. The same thing can be done by computers. Two stages can be defined in this process, first the extraction of the concepts from the tweet, after that a context can be created by linking the tweet to other sources.
 \subsubsection{Concept extraction}
-In this case by concepts we mean named entities such as names of locations, people and organizations. To recognize these entities multiple learning algorithms or even combinations of learning algorithms have been proposed. The most common is statistical learning. Think of algorithms like Maximum Entropy Models, Hidden Markov Models or neural networks. Other proposed algorithms are AdaBoost.MH, employed memory-based learning, transformation-based learning, support vector machines and conditional random fields. All of them in decreasing frequency of use.\cite{EntityRecognition} Florian et al. have shown that combining multiple classifiers can increase the performance, compared to the best performing classifier, by 17-21 \%.\cite{ClassifierCombination} After the entities have been found, labels are assigned to distinguish between a person, an organization or location. Then Abel et al. propose to use the RDF.\cite{AdaptiveSearch} By doing so sources from the Semantic Web (e.g. DBpedia \footnote{http://dbpedia.
+In this case by concepts we mean named entities such as names of locations, people and organizations. To recognize these entities multiple learning algorithms or even combinations of learning algorithms have been proposed. The most common are the statistical learning algorithms. Think of algorithms like Maximum Entropy Models, Hidden Markov Models or neural networks. Other proposed algorithms are AdaBoost.MH, employed memory-based learning, transformation-based learning, support vector machines and conditional random fields. All of them in decreasing frequency of use.\cite{EntityRecognition} Florian et al. have shown that combining multiple classifiers can increase the performance, compared to the best performing classifier, by 17-21 \%.\cite{ClassifierCombination} After the entities have been found, labels are assigned to distinguish between a person, an organization or a location. These labels on its own are not worth a lot. They can be used in an application that is build to handle these labels. Therefore Abel et al. propose to use the RDF.\cite{AdaptiveSearch} By doing so sources from the Semantic Web (e.g. DBpedia \footnote{http://dbpedia.
 org/}) can now be leveraged to enrich the data. Another advantage of using RDF is that RDF is a Semantic Web standard recommended by the W3C\footnote{http://www.w3.org/RDF/}. Because W3C recommends to use this model, most likely a lot of other sources also use this model. This will give a much bigger knowledge base to enrich the data from.
+
+The whole process of building a system to extract concept from a tweet seems to be a lot of work. Fortunately there are services like OpenCalais\footnote{www.opencalais.com}. OpenCalais is a web service that can extract concepts. Not only does it return the entities, it will also return facts and events hidden in the text, which will make the result even more useful.
 \subsubsection{Context creation}
-The problem of linking tweets to another source of information poses the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweets is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times.
+The problem of linking tweets to another source of information poses one the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweets is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times.
 
 Linking to just news articles narrows the problem significantly, however, actually linking the tweets and the new articles still is an issue. Abel et al. propose two main linking strategies, divided into five methods total.
 \begin{enumerate}
 \item \textbf{URL-based strategy}\\
 This strategy is based upon the observation that many tweets contains URLs. Usually these URLs refer to news articles the tweets are closely related to. Two URL-based strategies are proposed
 	\subitem \textbf{Strict URL-based} defines an article $a$ and a tweet $t$ to be related when $t$ contains an URL to $a$.
-	\subitem \textbf{Lenient URL-based}, this method is an extension of the strict URL-based method. This extension entails that if a tweet $t$ has a link to an article $a$, all tweets that are retweeting $t$ are considered linked to $a$. The same counts for tweets that are in responds to $t$, these tweets will also be considered linked to $a$.
+	\subitem \textbf{Lenient URL-based}, this method is an extension of the strict URL-based method. This extension entails that if a tweet $t$ has a link to an article $a$, all tweets that are retweeting $t$ are considered linked to $a$. The same counts for tweets that are in responds to $t$. These tweets will also be considered linked to $a$.
 \item \textbf{Content-based strategy}\\
 Content-based strategies rely on the idea of finding as much similarity as possible between the content of a tweet and the content of a news article. The most similar tweet-article pair is considered to be related and therefor they are linked.
 	\subitem \textbf{Bag of words}, in this method a tweet is represented as a vector of word frequencies. For a news article we can also create a vector the represent it. To link an article to a tweet we need to calculate the similarity between the tweet and the article and pick the one with the highest similarity. The similarity is calculated by the $TF \times IDF$ (Term Frequency times Inverse Document Frequency): the number of times a word from the tweet occurs in a news article, multiplied by the logarithm of the total number of articles over the number of articles the word occurs in. \cite{tfidf}
 	\subitem \textbf{Hashtag-based} is based upon the same concept as the Bag of words method. The difference is that we do not consider the words in the article, instead we only use the hashtags in the representation of a tweet to calculate the $TF \times IDF$ with.
 	\subitem \textbf{Entity-based} is also based upon the Bag of words method. The entity-based method does not consider words in an article. It relies on the entities that are mentioned in the article to make a vector to represent the article. 
 \end{enumerate}
-Using these method a broader context can be created. This still is not much more useful than the tweet on its own. For the article to be actually useful the topics of the articles have to be extracted. To do this Natural Language Processing and machine learning can be used to extract the entities from the article. OpenCalais\footnote{www.opencalais.com} is a web service that does just that. It returns not only the entities, it will also return facts and events hidden in the text, which will make the result much more useful. 
+Using these method a broader context can be created. This still is not much more useful than the tweet on its own. For the article to be actually useful the topics of the articles have to be extracted. To do this Natural Language Processing and machine learning can be used to extract the entities from the article.  
 
 \subsection{Sentiment analysis}
-Sentiment analysis or opinion mining is "a linguistic analysis technique where a body of text is examined to characterize the tonality of the document."\footnote{http://lexicon.ft.com/Term?term=sentiment-analysis} In other words, the goal of a sentiment analysis is to extract the writers opinion on some topic from a body of text. This body of text can very well be a tweet, and that combined with the popularity of microblogging amongst internet users, makes Twitter a very interesting body of knowledge about the opinion of a large group of people. But in order to get to that knowledge the data has to be analyzed fist. 
+Sentiment analysis or opinion mining is, as the Financial Times defines it, "a linguistic analysis technique where a body of text is examined to characterize the tonality of the document."\footnote{http://lexicon.ft.com/Term?term=sentiment-analysis} In other words, the goal of a sentiment analysis is to extract the writers opinion on some topic from a body of text. This body of text can very well be a tweet, and that combined with the popularity of microblogging amongst internet users, makes Twitter a very interesting body of knowledge about the opinion of a large group of people. But in order to get to that knowledge the data has to be analyzed fist. 
 The most important and most obvious issue is how to extract an opinion from a tweet. In the next part we will discuss a few ways to extract an opinion from a tweet.
 \subsubsection{Semantics }
-The most important way to extract a sentiment from a tweet is by analyzing its semantics. After all, tweets are written text. A sentiment can be assigned to a tweet using machine learning algorithms. Pang et al. \cite{machineLearning} have done a comparative study of three standard machine learning algorithms for sentiment analysis: 
+The most important way to extract a sentiment from a tweet is by analyzing its semantics. After all, tweets are written text. A sentiment can be assigned to a tweet using machine learning algorithms. Pang et al. \cite{machineLearning} have done a study on three standard machine learning algorithms for sentiment analysis: 
 \begin{enumerate}
-\item \textbf{Naive Bayes} is a fair simple classifier that operates under the assumption that the presents or absence of features does not relate to the presents of other features. If we apply that on Twitter we would get $c = \arg\max_{c\in C} P(c|w)$ where $c$ is a sentiment class, $C$ the collection of sentiment classes and $w$ is a tweet. \cite{sentAnalysis}
+\item \textbf{Naive Bayes} is a fair simple classifier that operates under the assumption that the presents or absence of features does not relate to the presents of any of the other features. Applying that on Twitter with sentiment analysis, gives us $c = \arg\max_{c\in C} P(c|w)$ where $c$ is a sentiment class, $C$ the collection of sentiment classes and $w$ is a tweet. \cite{sentAnalysis}
 \item \textbf{Maximum Entropy} is a model that, unlike Bayes, does not make an independence assumption. It operates under the philosophy that "we should choose the model making the fewest assumptions about the data while still remaining consistent with it".\cite{machineLearning} \\
 The formula is of the form $P(c|d) = \frac{1}{Z(d)}\exp(\Sigma_i \lambda_{i,c}F_{i,c}(d,c))$, where $Z(d)$ is a normalization function, $\lambda_{i,c}$ a weighted vector determining the significance of the feature and $F_{i,c}$ is a class/feature function. 
 \item \textbf{Support Vector Machine} is fundamentally different from Naive Bayes and Max Entropy because it is not a probabilistic model. The basic idea behind a support vector machine is that a vector is trained to separate the sentiments. Not only will it separate the training data, it will do so at the largest possible margin. 
@@ -131,21 +120,20 @@ It turns out that over the whole the Support Vector Machine performs the best on
 \subsubsection{Emoticons}
 Other than semantical analysis we can also use other data from tweets. A good sentiment indicator are emoticons. Twitter users use emoticons (e.g. ":-)", ":(" or "=(") to indicate their mood.\cite{twitterSentiment} Since the number of emoticons is limited a sentiment can easily be assigned manually. The information from the emoticons can be leveraged in two ways
 \begin{enumerate}
-\item \textbf{Labeling:} The emoticons can be used to assign a sentiment to a tweet. This can be a very useful asset to take into account when assigning a sentiment to a tweet. The emoticons can be considered unigrams feature for some classifier. There they will be strong evidence for a certain sentiment.
+\item \textbf{Labeling:} The emoticons can be used to assign a sentiment to a tweet. This can be a very useful asset to take into account when assigning a sentiment to a tweet. The emoticons can be considered unigram features for some classifier. There they will be strong evidence for a certain sentiment.
 \item \textbf{Training:} Because of their clear evidence for a sentiment emoticons can also be used to build a training corpus for a supervised learning algorithm. Twitter can be queried for "positive" emoticons and "negative" emoticons and then, by assuming the emoticon reflects the sentiment of message, the tweet can be labeled accordingly.\cite{moodLens} 
 \end{enumerate}
 We now see that emoticons can be used to extract a sentiment from a tweet. However, they are not sufficient to just use emoticons to label the tweets. Simply because not all tweets contain emoticons.
 \subsubsection{Usage}
 The possibilities of sentiment analysis are not too hard to imagine. Every company wants to know how their newly launched product is doing, film makes want to know what people think about their new movie and politicians want to know how they are doing for the next elections. Using sentiment analysis all this information will become available\cite{machineLearning}. 
-\subsection{Metadata analysis (opt)}
 
 \section{Tweet stream analysis}
-\subsection{Statistics}
+What we have seen so far was the analysis on one tweet. This is all very interesting from a computer science point of view. All the different techniques to extract the meaning of a tweet in such a way that it is machine interpretable. However, the real knowledge is in the big data, not in a single tweet. Extracting that knowledge poses a whole new set of problems.
 
 \subsection{User Classification}
 User classification is the problem of classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In this chapter we will discuss User Models, some features used to classify users and some use-cases. 
 \subsubsection{User Models}
-Before it is possible to classify a user, it is useful to create a model of a user. In their paper Fabel et al compare the following three ways to model a user. \cite{usermodel}
+Before it is possible to classify a user, it is useful to create a model of a user. In their paper F. Abel et al compare the following three ways to model a user. \cite{usermodel}
 \begin{itemize}
 \item Hashtag-based
 \item Entity-based
@@ -161,18 +149,18 @@ To classify users a set of features is needed to distinguish between users. In t
 Linguistics can say a lot about the interests of a user. To classify a user Prototipical Words(PW's) can be used.  \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. In a twitter-context also Prototipical Hashtags can be used.
 \\\\
 \textbf{Interaction Profiles}\\
-Users interaction profiles is a profile created by \cite{pol} to capture interactions between users and other accounts. An interaction is a retweet or a reply. \cite{usermachine} also uses friend accounts as a measurement in interaction between users. A friend account of user $x$ is an account that is followed by user $x$. 
+Users interaction profiles is a profile created by \cite{pol} to capture interactions between users and other accounts. An interaction is a retweet or a reply. \cite{usermachine} also uses friend accounts as a measurement in interaction between users. A friend account of user $x$ is an account that is followed by user $x$.  %TODO read this over, second sentence unclear 
 \\\\
 \textbf{Tweeting Behavior}\\
-Tweeting behavior is a set of characteristics which shows us the way a users interacts with twitter. Things like the average number of messages, number of replies \& number of friends seems a good quantifier for classification. According to \cite{usermachine} these features are useful but not really discriminative. 
+Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Things like the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to \cite{usermachine} these features are useful but not really discriminative. 
 \\\\
 \textbf{Profile}\\
-Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. According to \cite{usermachine} 80\% of the users provide a location and 48\% of the users provide a short bio. Furthermore \cite{usermachine} was able to extract a gender for 80\% of the users, but with a very low accuracy. \cite{usermachine} also researched the profile picture/avatar of twitter users. They found out that these pictures can often be misleading as 20\% of the found profile pictures was not the owner but another person such as a celebrity. 
+Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. According to \cite{usermachine} 80\% of the users provides a location and 48\% of the users provides a short bio. Furthermore \cite{usermachine} was able to extract a gender for 80\% of the users, but with a very low accuracy. \cite{usermachine} also researched the profile picture/avatar of twitter users. They found out that these pictures can often be misleading as 20\% of the found profile pictures was not the owner but another person such as a celebrity. 
 
 \subsubsection{Usecase: Predicting Political Preferences}
 During election time it can be useful to predict the political preferences of a user. In \cite{pol} a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. 
 
-To achieve this a combination of (political) hashtags in combination with twitter activities is used. To know if a user mentions an account of an election candidate \cite{pol} semi-automatically scraped a number of these accounts. Furthermore they collected 181972 tweets about politics, before processing these tweets non-personal and spam accounts had to be filtered.
+To achieve this (political) hashtags in combination with twitter activities is used. To know if a user mentions an account of an election candidate \cite{pol} semi-automatically scraped a number of these accounts. Furthermore they collected 181972 tweets about politics, before processing these tweets non-personal and spam accounts had to be filtered.
 
 To classify the users a one vs all classifier is trained. (Which will recorgnize one party vs all other parties.) After this all information is combined to predict a political party for each user. 
 \subsection{Tag based analysis}
@@ -190,19 +178,13 @@ Each component $\kappa_i$ has its own value between 0 and 1 computed by the func
 
 Therefore, the hybrid model is defined as the function $\varphi (u, q, r) = \sum\limits_{i = 1}^k \alpha_i \phi_i (u,q,r)$
 
-All weights $\alpha_i$ are then computed by applying a random-restart hill climbing technique. A subset is used as a holdout set, and a vector
-gets created with random weights that sum to 1. The recommender then modifies the vector over the holdout set to train the algorithm until it reaches
-a stable point. The algorithm then restarts to avoid local minima.
+All weights $\alpha_i$ are then computed by applying a random-restart hill climbing technique. A subset is used as a holdout set, and a vector gets created with random weights that sum to 1. The recommender then modifies the vector over the holdout set to train the algorithm until it reaches a stable point. The algorithm then restarts to avoid local minima.
 
 \item \textbf{Pair-Wise Interaction Tensor Factorization} 
 
-The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has
-been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter. 
-The adaptation involves changing the roles of resources and tags with respect to each other.
+The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter. The adaptation involves changing the roles of resources and tags with respect to each other.
 	
-This model is restricted in a way because its output is a set of matrices that illustrates a special case of the Tucker decomposition of a tensor. 
-The tensor is not directly linked to the dataset, but rather implies a ranking. It is therefor only useful in the case of tag-based resource recommendation, 
-and not for resource recommendations with other requirements.
+This model is restricted in a way because its output is a set of matrices that illustrates a special case of the Tucker decomposition of a tensor. The tensor is not directly linked to the dataset, but rather implies a ranking. It is therefor only useful in the case of tag-based resource recommendation, and not for resource recommendations with other requirements.
 	
 To build the model, the data has to be observed in the form $(u, r+, r-, t)$ where $(u, r+, t)$ and $(u, r-, t)$ is a triple respectively
 found and not found in the dataset. A ranking function is then used to prefer positive examples over negative ones. An iterative gradient-descent
@@ -229,21 +211,20 @@ $\phi (u, \{t\}, r) = \sum_{i=1}^k U_k\{u\}\{i\}R_k^U\{r\}\{i\} + T_k\{t\}\{i\}R
 
 \subsection{Event identification}
 
-Event identification is the problem of identifying events(e.g. concerts, festivals \& incidents) in a twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers \& News Sites)
+Event identification is the problem of identifying events(e.g. concerts, festivals and incidents) in a twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers and News Sites).
 
-To identify an event using an algorithm, a definition of an event is needed. \cite{eventident} defines an event as: "a real world occurence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the
-occurrence and published during time $T_e$."
+To identify an event using an algorithm, a definition of an event is needed. \cite{eventident} defines an event as: "a real world occurrence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the occurrence and published during time $T_e$."
 
 \subsubsection{Event Identification Issues}
 In this section we will discuss several issues regarding Event Identification and the solutions associated with them.
 \\\\ 
 \textbf{Separation of Event and Non-event Content}\\
-Because not all tweets on twitter are event content, a seperation of Event and Non-event content is done prior of identifying events. To achieve this separation, \cite{eventident} uses an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing twitter-environment.
+Because not all tweets on twitter are event content, a separation of Event and Non-event content is done prior of identifying events. To achieve this separation, \cite{eventident} uses an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing twitter-environment.
 
 After the clustering a number of features is used to distinguish between event and non-event clusters. The following features are used by \cite{eventident} to identify an event cluster. 
 \begin{itemize}
   \item Temporal: The characteristics of the volume over the time $T_e$ associated with an event. 
-  \item Social: The interactions between users(e.g. retweets, replies \& mentions) during events could differ from other activities. 
+  \item Social: The interactions between users(e.g. retweets, replies and mentions) during events could differ from other activities. 
   \item Topical: Tweets about events tend to center more around one central topic. Furthermore messages in event clusters are more likely to share one or more event-specific key-terms.  
   \item Twitter-centric: Some activities behave like an event but are Twitter-centric.(e.g. Tweets like 'Goodmorning!') These activities need to be filtered. 
 \end{itemize}
@@ -252,11 +233,12 @@ With this list of features two event-classifiers are trained using two different
 \\\\
 \textbf{Aligning Tweets with an Event} \\
 On average thousands of tweets are sent every minute using Twitter(bron) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. \cite{eventalign} tries to create an automated mapping solution for this problem using semantics.
+%TODO source toevoegen!
 
-At first the data is enriched, Twitter exposes the data using different formats such as JSON \& XML. To make this data more machine readable \cite{eventalign} enrich the data with sematics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of \cite{eventalign}.
+At first the data is enriched, Twitter exposes the data using different formats such as JSON and XML. To make this data more machine readable \cite{eventalign} enrich the data with semantics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of \cite{eventalign}.
 
 %TODO misschien wat meer info over het semantic web toevoegen.
-After this process \cite{eventalign} uses multiple techniques to align a tweet with the respective event. The first technique used by \cite{eventalign} is Feature Extraction. Three featuresets are used:
+After this process \cite{eventalign} uses multiple techniques to align a tweet with the respective event. The first technique used by \cite{eventalign} is Feature Extraction. Three feature sets are used:
 \begin{itemize}
 %TODO uitwerken
   \item Immediate Resource Leaves: Use only the URI which are most indicative of an event. This feature only uses literals and resources within the URI of an event. 
