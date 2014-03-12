@@ -150,7 +150,7 @@ To classify users a set of features is needed to distinguish between users. In t
 Linguistics can say a lot about the interests of a user. To classify a user Prototipical Words(PW's) can be used.  \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. In a twitter-context also Prototipical Hashtags can be used.
 \\\\
 \textbf{Interaction Profiles}\\
-Users interaction profiles is a profile created by Makazhanov \& Raﬁei to capture interactions between users and other accounts. \cite{pol} An interaction is a retweet or a reply. Pennacchiotti \& Popescu also uses friend accounts as a measurement in interaction between users. \cite{usermachine}  A friend account of user $x$ is an account that is followed by user $x$.  %TODO read this over, second sentence unclear 
+Users interaction profiles is a profile created by Makazhanov \& Raﬁei to capture interactions between users and other accounts. \cite{pol} An interaction is a retweet or a reply. Pennacchiotti \& Popescu also uses friend accounts as a measurement in interaction between users. \cite{usermachine}  A friend account of user $x$ is an account that is followed by user $x$.  
 \\\\
 \textbf{Tweeting Behavior}\\
 Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Things like the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to Pennacchiotti \& Popescu these features are useful but not really discriminative. \cite{usermachine}
@@ -238,10 +238,10 @@ On average thousands of tweets are sent every minute using Twitter(\footnote{htt
 
 At first the data is enriched, Twitter exposes the data using different formats such as JSON and XML. To make this data more machine readable then they enrich the data with semantics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of Rowe \& Stankovic paper. \cite{eventalign}
 
-%TODO misschien wat meer info over het semantic web toevoegen.
+
 After this process  Rowe \& Stankovic \cite{eventalign} uses multiple techniques to align a tweet with the respective event. The first technique used by them is Feature Extraction. \cite{eventalign} Three feature sets are used:
 \begin{itemize}
-%TODO uitwerken
+
   \item Immediate Resource Leaves: Use only the URI which are most indicative of an event. This feature only uses literals and resources within the URI of an event. 
   \item 1-Step Resource Leaves: Use all literals and resources within 1 step from the URI of an event. 
   \item DBPedia Concepts: Also uses all the concepts from DBPedia 
