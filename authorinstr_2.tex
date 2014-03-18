@@ -142,14 +142,13 @@ Before it is possible to classify a user, it is useful to create a model of a us
 
 \end{itemize}
 After all these approaches are used on the same dataset it appears that the variety of entity-based profiles was much higher than the hashtag based approach. \cite{usermodel} Furthermore the hashtag-based approach fails to create a profile for 5.5\% of the users where the other approaches don't have this problem.  
+%TODO uitbreiden
 
 \subsubsection{Classification Features}
 To classify users a set of features is needed to distinguish between users. In this section we will present a list of frequently used features to classify users.  
 \\\\
 \textbf{Linguistics}\\
 Linguistics can say a lot about the interests of a user. Furthermore it can be used to distinguish between different types of users. One way to classify a user using linguistics is done by using Prototipical Words(PW's). \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. (e.g. younger people will probably use terms like "lol" and "yolo" more than older users). To define prototipical words for i classes the propability that a user of class $c_i$ will use word $w$ needs to be calculated. Given n classes and some seed users $S_i$ this probability is calculated using the following formula: $proto(w, c_i) = \frac{|w, S_i|}{\sum_{j=1}^n |w, S_j|}$. \cite{userclasst} In a Twitter-context Prototipical Hashtags can be used in the same way.
-
-Another way to classify users is by applying the Latent Dirichlet Allocation (LDA), the idea behind this model is that some class $c_0$ will probably talk more about subject $A$ than class $c_1$ %TODO Afmaken
 \\\\
 \textbf{Interaction Profiles}\\
 Users interaction profiles is a profile created by Makazhanov \& Raﬁei to capture interactions between users and other accounts. \cite{pol} An interaction is a retweet or a reply. It is also possible to use friend accounts as a measurement in interaction between users.  A friend account of user $x$ is an account that is followed by user $y$. In the same way as prototypical words are calculated prototypical replies and retweets can be calculated to classify a user. (e.g. a democrat may tend to retweet a message from a democratic candidate) \cite{userclasst} 
@@ -238,23 +237,20 @@ With this list of features two event-classifiers are trained using two different
 On average thousands of tweets are sent every minute using Twitter(\footnote{https://blog.twitter.com/2013/new-tweets-per-second-record-and-how}) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. Rowe \& Stankovic try to create an automated mapping solution for this problem using semantics. \cite{eventalign}
 
 
-At first the data is enriched, Twitter exposes the data using different formats such as JSON and XML. To make this data more machine readable then they enrich the data with semantics, after this process the data can then  be used as linked data which is more machine readable. The full enrichment process is described in section 2 of Rowe \& Stankovic paper. \cite{eventalign}
-
-
-After this process multiple techniques are used to align a tweet with the respective event. The first technique used by them is Feature Extraction. \cite{eventalign} The following three featuresets are used:
+At first the data is enriched, Twitter exposes the data using different formats such as JSON and XML. To make this data more machine readable then they enrich the data with semantics, after this process the data can then  be used as linked data which is more machine readable. After this process multiple techniques are used to align a tweet with the respective event. The first technique used by them is Feature Extraction. \cite{eventalign} The following three featuresets are used:
 \begin{itemize}
 
   \item Immediate Resource Leaves: Use only the URI which are most indicative of an event. This feature only uses literals and resources within the URI of an event. 
   \item 1-Step Resource Leaves: Use all literals and resources within 1 step from the URI of an event. 
-  \item DBPedia Concepts: Also uses all the concepts from DBPedia 
+  \item DBPedia Concepts: Also uses all the concepts from DBPedia, the machine readable version of Wikipedia.
 \end{itemize}
-After this a Feature Vector is composed, for tweets all stop words are removed from the bag of words a tweet is represented as. Furthermore all stopwords are removed and everything is normalized to lowercase. \cite{eventalign} Then a labeling function is used to label the event. 
+After this a Feature Vector is composed, for tweets all stop words are removed from the bag of words a tweet is represented as. Furthermore all stopwords are removed and everything is normalized to lowercase. \cite{eventalign} 
+
+Then a labeling function is used to label the event, two types of labeling functions are tested. (1) Proximity-based Clustering (PbC) (2) Naive Bayes. PbC is an algorithm similar to K-means with k already known. The collection of tweets $X$ is observed and the class is returned for whicht the distance of between an event it's mean and the tweet vector is minimized. The Naive Bayes approach uses the formula $y = \arg\max_{y \in Y} P(y)\prod_i P(x_i, y)$ to assign the most probable class label $y \in Y$ to tweet $x$. The Naive Bayes approach outperforms PbC for all feature sets.  \cite{eventalign}
 \subsubsection{Usecase: Earthquake Detection}
 In Sakaki et al. their paper a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} They consider twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
 
-To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. 
-
-With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
+To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
 \cite{earthq}
 \newpage
 
