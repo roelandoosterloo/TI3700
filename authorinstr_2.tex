@@ -39,7 +39,13 @@ This is the abstract of my paper.
 
 \section{Introduction}
 
-Microblogging has grown out to become one of the most interesting forms of social media. Its most popular implementation has to be Twitter, where users can share short messages, called Tweets, with any other user. The limitation of 140 characters per Tweet forces users to compress all their information into a small message, making them extra interesting to analyze. These Tweets often contain information broadcasted by the user in the form of opinions, emotions, interests, etc. One of the biggest challenges is finding a way to extract the intended information from these Tweets. Once the information is extracted however, the possible applications are endless. This paper is dedicated to giving an overview of successful techniques and useful applications of these social web data analytics. In the following section, Twitter's API gets introduced which will show that the platform already offers great tools and commands to retrieve specific datasets, or a completely random sample stream of Tweets. After that, 
+Microblogging has grown out to become one of the most interesting forms of social media. Its most popular implementation has to be Twitter, 
+where users can share short messages, called Tweets, with any other user. These short 140 character messages often contain valuable information about the user, their
+interests, opinions, etc. This information can be very useful for a variety of applications, making social web data analytics an important field within
+information technology. One of the biggest challenges is finding a way to extract the intended information from these Tweets. 
+This paper is dedicated to giving an overview of successful techniques and useful applications of these social web data analytics. We will build up from
+the basic techniques used by developers to collect tweets, to effective techniques that extract useful information from them. In the following section, 
+Twitter's API gets introduced which will show that the platform already offers great tools and commands to retrieve specific datasets, or a completely random sample stream of Tweets. After that, 
 two entire sections will be dedicated to all sorts of techniques that are being used to extract and analyze this information. The first section will focus on single tweets, and the second section is focused on sets of multiple Tweets. Both of these sections will involve several usecases for certain techniques.
 
 %TODO: Add what the conclusion will say
@@ -135,15 +141,14 @@ What we have seen so far was the analysis on one tweet. This is all very interes
 \subsection{User Classification}
 User classification is the problem of classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In this chapter we will discuss User Models, some features used to classify users and some use-cases. 
 \subsubsection{User Models}
-Before it is possible to classify a user, it is useful to create a model of a user. In their paper F. Abel et al compare the following three ways to model a user \cite{usermodel}:
+Before it is possible to classify a user, it is useful to create a model of a user. A user model can vary in three ways. It can vary in the type of profile, the data sources used to enrich the profiles and some temporal constraints. A user profile can be represented by $P(u) = \{(c, w(u,c))| c \in C, u \in U\}$. In this formula $u$ is a user in the set of user $U$ and $c$ is a concept in the set of concepts $C$ is a concept In their paper F. Abel et al compare the following three ways to create a user Profile \cite{usermodel}:
 \begin{itemize}
 \item Hashtag-based
 \item Entity-based
 \item Topic-based
-
 \end{itemize}
-After all these approaches are used on the same dataset it appears that the variety of entity-based profiles was much higher than the hashtag based approach. \cite{usermodel} Furthermore the hashtag-based approach fails to create a profile for 5.5\% of the users where the other approaches don't have this problem.  
-%TODO uitbreiden
+After all these approaches are used on the same dataset it appears that the variety of entity-based profiles was much higher than the hashtag based approach. \cite{usermodel} Furthermore the hashtag-based approach fails to create a profile for 5.5\% of the users where the other approaches don't have this problem. 
+
 
 \subsubsection{Classification Features}
 To classify users a set of features is needed to distinguish between users. In this section we will present a list of frequently used features to classify users.  
@@ -187,7 +192,7 @@ All weights $\alpha_i$ are then computed by applying a random-restart hill climb
 
 The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter. The adaptation involves changing the roles of resources and tags with respect to each other.
 	
-This model is restricted in a way because its output is a set of matrices that illustrates a special case of the Tucker decomposition of a tensor. The tensor is not directly linked to the dataset, but rather implies a ranking. It is therefor only useful in the case of tag-based resource recommendation, and not for resource recommendations with other requirements.
+This model is restricted in a way because its output is a set of matrices that illustrates a special case of the Tucker decomposition of a tensor. The tensor is not directly linked to the dataset, but rather implies a ranking. It is therefore only useful in the case of tag-based resource recommendation, and not for resource recommendations with other requirements.
 	
 To build the model, the data has to be observed in the form $(u, r+, r-, t)$ where $(u, r+, t)$ and $(u, r-, t)$ is a triple respectively
 found and not found in the dataset. A ranking function is then used to prefer positive examples over negative ones. An iterative gradient-descent
