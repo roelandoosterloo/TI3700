@@ -258,10 +258,13 @@ In Sakaki et al. their paper a usecase for Event Identification is presented in 
 
 To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
 \cite{earthq}
-\newpage
 
 \section{Conclusion}
+In this paper we have tried to give an overview of the studies that have been done on analysis on Twitter and the question that still play in this field of study. We started off by introducing the Twitter API. This is the most important way to get data from Twitter. Here we also introduced all the different concept that can be retrieved from Twitter. 
 
+In the following section we went up one level of abstraction. Here we discussed the techniques of analysis on a single tweet. Starting with data enrichment. This is the field of study where we try to give data more (machine-interpretable) meaning. We found that concept extraction is at the very basis of any enrichment technique and it is used to improve the performance of other algorithms. Because it is such a common technique, web services are available that can do this task. Next up was sentiment analysis. This is the labeling of a document according to its sentiment. From our literature it got clear that the performance of sentiment classifiers, even enhanced with emoticons, falls behind compared to topic classifiers. 
+
+The next section was again a higher level of abstraction. In this chapter we did not consider the data hidden in a single tweet, the focus was on a stream of tweets and what information can be extracted from a stream of tweets. First up was the user modeling. The idea here is that we can use the tweets from a certain user to create a profile from that user.
 \newpage
 
 \bibliographystyle{plain}
