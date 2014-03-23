@@ -77,7 +77,7 @@ beneficial to both Twitter's popularity and a lot of its users, including resear
 	\subitem \textbf{place\_type} Returns the type of a place, for example ``city''
 \end{enumerate}
 
-When the above fields are combined, it is possible to create datasets of Tweets that fulfill a certain specification. These sets can then be used to extract specific information. However, defining your own dataset may introduce a certain bias, and sometimes you need a random sample of tweets to analyze. For this purpose, Twitter has a streaming function that third party developers can tap into to retrieve random tweets. Unfortunately, the Twitter stream can only retrieve tweets that are less than a few days old.
+When the above fields are combined, it is possible to create datasets of tweets that fulfill a certain specification. These sets can then be used to extract specific information. However, defining your own dataset may introduce a certain bias, and sometimes you need a random sample of tweets to analyze. For this purpose, Twitter has a streaming function that third party developers can tap into to retrieve random tweets. Unfortunately, the Twitter stream can only retrieve tweets that are less than a few days old.
 
 The following of this paper describes algorithms that dive into the big data of Twitter, how to extract useful information from the tweets, and what the information can be applied to.
 
@@ -161,10 +161,10 @@ Users interaction profiles is a profile created by Makazhanov \& Raﬁei to capt
 Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Features such as the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to Pennacchiotti \& Popescu these features are useful but not really discriminative. \cite{userclasst} 
 \\\\
 \textbf{Profile}\\
-Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. Research has shown that 80\% of the users provides a location and 48\% of the users provides a short bio. \cite{usermachine} It is was possible to extract a gender for 80\% of the users, but with a very low accuracy. They also researched the profile picture/avatar of twitter users and found out that these pictures can often be misleading. 20\% of the found profile pictures was not the owner but another person such as a celebrity. \cite{usermachine}
+Profile information can be helpful to classify a user, but it should be used with care due to the amount of fake, inconsistent or incorrect information. Research has shown that 80\% of the users provides a location and 48\% of the users provides a short bio. \cite{usermachine} It is was possible to extract a gender for 80\% of the users, but with a very low accuracy. They also researched the profile picture/avatar of Twitter users and found out that these pictures can often be misleading. 20\% of the found profile pictures was not the owner but another person such as a celebrity. \cite{usermachine}
 
 \subsubsection{Usecase: Predicting Political Preferences}
-During election time it can be useful to predict the political preferences of a user. In Makazhanov \& Raﬁei's paper a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. \cite{pol} To achieve this (political) hashtags in combination with twitter activities is used. To know if a user mentions an account of an election candidate a number of these accounts are scraped semi-automaticall. This resulted in the collection of 181972 tweets about politics.\cite{pol}
+During election time it can be useful to predict the political preferences of a user. In Makazhanov \& Raﬁei's paper a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. \cite{pol} To achieve this (political) hashtags in combination with Twitter activities is used. To know if a user mentions an account of an election candidate a number of these accounts are scraped semi-automaticall. This resulted in the collection of 181972 tweets about politics.\cite{pol}
 
 Before processing these tweets non-personal and spam accounts had to be filtered. Using multiple techniques spam was filtered, but after filtering only 0.3\% of the accounts were labeled as spam. After a manual check none of these accounts seemed to be a spammer. But after removing spam accounts there are still some Non-Personal(NP)-accounts(e.g Businesses, official entities and News Papers)  that should be removed before processing the data. This is mostly done by using the provided profile information and filtering on city names in the user names.  \cite{pol}
 
@@ -217,7 +217,7 @@ $\phi (u, \{t\}, r) = \sum_{i=1}^k U_k[u][i]R_k^U[r][i] + T_k[t][i]R_k^T[r][i]$
 
 \subsection{Event identification}
 
-Event identification is the problem of identifying events(e.g. concerts, festivals and incidents) in a twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers and News Sites).
+Event identification is the problem of identifying events(e.g. concerts, festivals and incidents) in a Twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers and News Sites).
 
 To identify an event using an algorithm, a definition of an event is needed. Becker et al.  define an event as: "a real world occurrence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the occurrence and published during time $T_e$." \cite{eventident} 
 
@@ -225,7 +225,7 @@ To identify an event using an algorithm, a definition of an event is needed. Bec
 In this section we will discuss several issues regarding Event Identification and the solutions associated with them.
 \\\\ 
 \textbf{Separation of Event and Non-event Content}\\
-Because not all tweets on twitter are event content, a separation of Event and Non-event content is done prior of identifying events. To achieve this separation, Becker et al.  use an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing twitter-environment. \cite{eventident} 
+Because not all tweets on Twitter are event content, a separation of Event and Non-event content is done prior of identifying events. To achieve this separation, Becker et al.  use an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing Twitter-environment. \cite{eventident} 
 
 After the clustering a number of features is used to distinguish between event and non-event clusters. The following features can be used to identify an event cluster. \cite{eventident} 
 \begin{itemize}
@@ -252,9 +252,9 @@ After this a Feature Vector is composed, for tweets all stop words are removed f
 
 Then a labeling function is used to label the event, two types of labeling functions are tested. (1) Proximity-based Clustering (PbC) (2) Naive Bayes. PbC is an algorithm similar to K-means with k already known. The collection of tweets $X$ is observed and the class is returned for whicht the distance of between an event it's mean and the tweet vector is minimized. The Naive Bayes approach uses the formula $y = \arg\max_{y \in Y} P(y)\prod_i P(x_i, y)$ to assign the most probable class label $y \in Y$ to tweet $x$. The Naive Bayes approach outperforms PbC for all feature sets.  \cite{eventalign}
 \subsubsection{Usecase: Earthquake Detection}
-In Sakaki et al. their paper a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} They consider twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
+In Sakaki et al. their paper a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} They consider Twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
 
-To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. With the above feature set as basis, a system that detects earthquakes using twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
+To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. With the above feature set as basis, a system that detects earthquakes using Twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
 \cite{earthq}
 
 \section{Conclusion}
