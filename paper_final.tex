@@ -94,17 +94,30 @@ and the analysis of bigger sets of tweets.
 
 \section{Techniques to analyse tweets}
 
-%\large
-%\hspace{9mm}\textbf{The analysis of a single tweet} ~
-%\normalsize
-%\newline
 %TODO: Inhoud is goed, vorm moet gestroomlijnder doorheen hele paper. Ook moet alles vanuit onze method geschreven worden, niet vanuit de papers
+
+The data that Twitter provides in the form of tweets can be separated into two distinct parts. There is data specified to a single tweet, 
+and data that can be taken from a set of tweets. Both forms of data have different qualities, different attributes, different applications, and therefore
+also a different set of techniques used to analyse them compared to each other. This section is separated into the same two forms, with each section
+highlighting their respecive most common techniques used in the field of social web data analytics.
 
 \section*{Analysing a single tweet}
 
-In this section we will discuss the different types of analysis that can be done on one single tweet. This usually is also the basis for a analysis of a larger amount of tweets or even on a stream of tweets. We will start of by discussing Data enrichment. This part will elaborate on the different techniques to enrich tweets in order to be able to do better analysis on that tweet. After that we will discuss Semantic analysis. In this section an overview is given of different techniques to do a sentiment analysis and how data enrichment can be used to improve the performance.
+The analysis of one single tweet forms the basis for the analysis of a bigger set of tweets. A single tweet is slightly harder to analyse because it usually
+lacks a pattern or an expected value. The challenge of single tweet analysis lies in the difficulty of making machine driven interfaces understand human
+intention and interpretation. It therefore forms the key to the analysis of bigger datasets of tweets, which reflects in the fact that the techniques used 
+to extract information from a single tweet usually reappear in extraction models used for bigger sets of tweets. 
+We will highlight the two most common techniques used to analyse a single tweet, being Data Enrichment and Sentiment Analysis. Data Enrichment is the
+enhancement of certain tweets by adding related data to simplify their analysis. Sentiment Analysis is the extraction of the intended sentiment behind a tweet.
+
 \subsection{Data Enrichment}
-At the very basis of the analysis of a tweet is data enrichment. Because the length of a tweet is limited to 140 characters, the users of Twitter use language in creative ways. These ways of communicating makes it sometimes, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans a context is created by linking the concepts from the tweet to earlier acquired knowledge. The same thing can be done by computers. Two stages can be defined in this process, first the extraction of the concepts from the tweet, after that a context can be created by linking the tweet to other sources.
+
+At the very basis of the analysis of a tweet is data enrichment. Because the length of a tweet is limited to 140 characters, 
+the users of Twitter use language in creative ways. These ways of communicating makes it sometimes, even for humans, hard to understand what a tweet is about. 
+To get a better understanding of the meaning of a tweet, a context is needed. For humans a context is created by linking the concepts from the tweet to 
+earlier acquired knowledge. The same thing can be done by computers. Two stages can be defined in this process, first the extraction of the concepts from 
+the tweet, after that a context can be created by linking the tweet to other sources.
+
 \subsubsection*{Concept Extraction}
 In this paper when we say concepts we mean named entities such as names of locations, people and organizations. To recognize these entities multiple learning algorithms or even combinations of learning algorithms have been proposed. Nowadays the most common are the statistical learning algorithms. Think of algorithms like Maximum Entropy Models, Hidden Markov Models or neural networks. Other proposed algorithms are AdaBoost.MH, employed memory-based learning, transformation-based learning, support vector machines and conditional random fields. All of them in decreasing frequency of use.\cite{EntityRecognition} Florian et al. have shown that combining multiple classifiers can increase the performance, compared to the best performing classifier, by 17-21 \%.\cite{ClassifierCombination} To do this they set up a framework to compare the results of different (combined) classifiers.  
 
@@ -116,7 +129,7 @@ The whole process of building a system to extract concept from a tweet seems to 
 The problem of linking tweets to another source of information poses one the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweets is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times.
 
 Linking to just news articles narrows the problem significantly, however, actually linking the tweets and the new articles still is an issue. Abel et al. propose two main linking strategies, divided into five methods total.
-\begin{enumerate}
+\begin{itemize}
 \item \textbf{URL-based Strategy}\\
 This strategy is based upon the observation that many tweets contains URLs. Usually these URLs refer to news articles the tweets are closely related to. Two URL-based strategies are proposed
 	\subitem \textbf{Strict URL-based} defines an article $a$ and a tweet $t$ to be related when $t$ contains an URL to $a$.
@@ -126,7 +139,7 @@ Content-based strategies rely on the idea of finding as much similarity as possi
 	\subitem \textbf{Bag of Words}, in this method a tweet is represented as a vector of word frequencies. For a news article we can also create a vector the represent it. To link an article to a tweet we need to calculate the similarity between the tweet and the article and pick the one with the highest similarity. The similarity is calculated by the $TF \times IDF$ (Term Frequency times Inverse Document Frequency): the number of times a word from the tweet occurs in a news article, multiplied by the logarithm of the total number of articles over the number of articles the word occurs in. \cite{tfidf}
 	\subitem \textbf{Hashtag-based} is based upon the same concept as the Bag of words method. The difference is that we do not consider the words in the article, instead we only use the hashtags in the representation of a tweet to calculate the $TF \times IDF$ with.
 	\subitem \textbf{Entity-based} is also based upon the Bag of words method. The entity-based method does not consider words in an article. It relies on the entities that are mentioned in the article to make a vector to represent the article. 
-\end{enumerate}
+\end{itemize}
 Using these method a broader context can be created. This still is not much more useful than the tweet on its own. For the article to be actually useful the topics of the articles have to be extracted. To do this Natural Language Processing and machine learning can be used to extract the entities from the article.  
 
 \subsection{Sentiment Analysis}
@@ -134,20 +147,20 @@ Sentiment analysis or opinion mining is, as the Financial Times defines it, "a l
 The most important and most obvious issue is how to extract an opinion from a tweet. In the next part we will discuss a few ways to extract an opinion from a tweet.
 \subsubsection*{Semantics }
 The most important way to extract a sentiment from a tweet is by analysing its semantics. After all, tweets are written text. A sentiment can be assigned to a tweet using machine learning algorithms. Pang et al. \cite{machineLearning} have done a study on three standard machine learning algorithms for sentiment analysis: 
-\begin{enumerate}
+\begin{itemize}
 \item \textbf{Naive Bayes} is a fair simple classifier that operates under the assumption that the presents or absence of features does not relate to the presents of any of the other features. Applying that on Twitter with sentiment analysis, gives us $c = \arg\max_{c\in C} P(c|w)$ where $c$ is a sentiment class, $C$ the collection of sentiment classes and $w$ is a tweet. \cite{sentAnalysis}
 \item \textbf{Maximum Entropy} is a model that, unlike Bayes, does not make an independence assumption. It operates under the philosophy that "we should choose the model making the fewest assumptions about the data while still remaining consistent with it".\cite{machineLearning} \\
 The formula is of the form $P(c|d) = \frac{1}{Z(d)}\exp(\Sigma_i \lambda_{i,c}F_{i,c}(d,c))$, where $Z(d)$ is a normalization function, $\lambda_{i,c}$ a weighted vector determining the significance of the feature and $F_{i,c}$ is a class/feature function. 
 \item \textbf{Support Vector Machine} is fundamentally different from Naive Bayes and Max Entropy because it is not a probabilistic model. The basic idea behind a support vector machine is that a vector is trained to separate the sentiments. Not only will it separate the training data, it will do so at the largest possible margin. 
-\end{enumerate}
+\end{itemize}
 It turns out that over the whole the Support Vector Machine performs the best on the sentiment analysis\cite{machineLearning}. The differences, however, are not substantially large. 
 
 \subsubsection*{Emoticons}
 Other than semantical analysis we can also use other data from tweets. A good sentiment indicator are emoticons. Twitter users use emoticons (e.g. ":-)", ":(" or "=(") to indicate their mood.\cite{twitterSentiment} Since the number of emoticons is limited a sentiment can easily be assigned manually. The information from the emoticons can be leveraged in two ways
-\begin{enumerate}
+\begin{itemize}
 \item \textbf{Labeling:} The emoticons can be used to assign a sentiment to a tweet. This can be a very useful asset to take into account when assigning a sentiment to a tweet. The emoticons can be considered unigram features for some classifier. There they will be strong evidence for a certain sentiment.
 \item \textbf{Training:} Because of their clear evidence for a sentiment emoticons can also be used to build a training corpus for a supervised learning algorithm. Twitter can be queried for "positive" emoticons and "negative" emoticons and then, by assuming the emoticon reflects the sentiment of message, the tweet can be labelled accordingly.\cite{moodLens} 
-\end{enumerate}
+\end{itemize}
 We now see that emoticons can be used to extract a sentiment from a tweet. However, they are not sufficient to just use emoticons to label the tweets. Simply because not all tweets contain emoticons.
 \subsubsection*{Usage}
 The possibilities of sentiment analysis are not too hard to imagine. Every company wants to know how their newly launched product is doing, film makes want to know what people think about their new movie and politicians want to know how they are doing for the next elections. Using sentiment analysis all this information will become available as Pang et al. \cite{machineLearning} have shown in their research. They tried to classify documents based on their sentiment. In their research they used movie reviews as documents. They found that a semantical classifier outperforms human classification but compared to topic-based classification, sentiment classification falls behind. So even though there are enough possible applications for sentiment analysis, there is still a lot of room for improvement in this field.
@@ -197,8 +210,8 @@ Twitter allows their users to contribute their own social annotations to their t
 which make them hold interesting information about both the tweet and the user that posted it. There are two dominant techniques that are currently being
 used by researchers to model the information of tagged based analysis, The Linear-Weighted Hybrid Model, and the Pair-wise Interaction Tensor Factorisation Model\cite{TagBased}.
 
-\begin{enumerate}
-\item \textbf{Linear-Weighted Hybrid}\\
+
+\subsubsection*{Linear-Weighted Hybrid}
 
 The Linear-Weighted Hybrid model uses the tags as recommendation components whose output is a weighted sum of components $\kappa_1$ through $\kappa_k$. 
 Each component $\kappa_i$ has its own value between 0 and 1 computed by the function $\phi_i (u,q,r)$, and a corresponding weight $\alpha_i$, also between
@@ -208,7 +221,7 @@ Therefore, the hybrid model is defined as the function $\varphi (u, q, r) = \sum
 
 All weights $\alpha_i$ are then computed by applying a random-restart hill climbing technique. A subset is used as a holdout set, and a vector gets created with random weights that sum to 1. The recommender then modifies the vector over the holdout set to train the algorithm until it reaches a stable point. The algorithm then restarts to avoid local minima.
 
-\item \textbf{Pair-Wise Interaction Tensor Factorization} 
+\subsubsection*{Pair-Wise Interaction Tensor Factorization} 
 
 The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter. The adaptation involves changing the roles of resources and tags with respect to each other.
 	
@@ -234,7 +247,6 @@ Where
 The relevance score of a resource can now be calculated by:
 
 $\phi (u, \{t\}, r) = \sum_{i=1}^k U_k[u][i]R_k^U[r][i] + T_k[t][i]R_k^T[r][i]$	
-\end{enumerate}
 
 
 \subsection{Event identification}
