@@ -166,7 +166,13 @@ We now see that emoticons can be used to extract a sentiment from a tweet. Howev
 The possibilities of sentiment analysis are not too hard to imagine. Every company wants to know how their newly launched product is doing, film makes want to know what people think about their new movie and politicians want to know how they are doing for the next elections. Using sentiment analysis all this information will become available as Pang et al. \cite{machineLearning} have shown in their research. They tried to classify documents based on their sentiment. In their research they used movie reviews as documents. They found that a semantical classifier outperforms human classification but compared to topic-based classification, sentiment classification falls behind. So even though there are enough possible applications for sentiment analysis, there is still a lot of room for improvement in this field.
 
 \section*{Analysing a set of tweets}
-What we have seen so far was the analysis on one tweet. This is all very interesting from a computer science point of view. All the different techniques to extract the meaning of a tweet in such a way that it is machine interpretable. However, the real knowledge is in the big data, not in a single tweet. Extracting that knowledge poses a whole new set of problems. In this part we will elaborate on User Classification, Tag Based analysis and Event Identification
+
+Now that we understand how the data of tweets are enriched, and how their sentiment is deduced, we hold the building blocks to create techniques that are able
+to analyse bigger sets of data. The analysis of a set of tweets is the key to creating applications based on Twitter information, of which some examples
+will be introduced in the next chapter. There are three common techniques used within the field of social web data analytics, which are the User Classification,
+the Tag Based Analysis and the Event Identification. The User Classification technique focussen on classifying every single tweet into a proposed set of classes.
+The Tag Based Analysis tries to link users based on the content that they attach to their tweets. Content can be another user, a hashtag subject, an image, url, etc.
+Event Identification has the goal of identifying real world events based upon a set of tweets.
 
 \subsection{User Classification}
 User classification is the problem of the classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In the first part of this chapter we will discuss User Models, whereas in the second part we will discuss some features used to classify users. We will also discuss how well these features can be used to classify users. At the end of this a practical use for these techniques and features is shown. 
@@ -269,6 +275,11 @@ After this a Feature Vector is composed, for tweets all stop words are removed f
 Then a labelling function is used to label the event, two types of labelling functions are tested. (1) Proximity-based Clustering (PbC) (2) Naive Bayes. PbC is an algorithm similar to K-means with k already known. The collection of tweets $X$ is observed and the class is returned for which the distance of between an event it's mean and the tweet vector is minimized. The Naive Bayes approach uses the formula $y = \arg\max_{y \in Y} P(y)\prod_i P(x_i, y)$ to assign the most probable class label $y \in Y$ to tweet $x$. The Naive Bayes approach outperforms PbC for all feature sets.  \cite{eventalign}
 
 \section{Applications that use tweet analysing techniques}
+
+We have seen how researcher obtain tweets for data, and how useful information is extracted from them. This chapter focussen on the application of this information.
+Given are two real world use cases that show why it is useful to extract information from the social web. The first use case illustrates the classification
+of users in political views in order to make predictions about an outcome of an election. The second use case is about how Twitter can be used to detect
+earthquakes by recognizing earthquake-related tweets that happen in real time.
 
 \subsection*{Predicting Political Preferences using User Classification}
 
