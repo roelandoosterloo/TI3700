@@ -23,6 +23,9 @@
 \thispagestyle{empty}
 
 \begin{abstract}
+
+%TODO: Dieper ingaan op onderwerpen, 'abstract' is enkel van toepassing op de paper, niet de onderwerpen
+
 Twitter is a popular microblogging website that allows users to share 140 character messages (tweets) with the rest of the world.
 The analysis of such messages has become its own field within information technology, with a range of techniques that all share the same cause:
 extracting useful information from these messages. This paper serves as an introduction to the research that has been done analysing tweets from Twitter,
@@ -35,6 +38,8 @@ for a variety of applications to be created using this information.
 
 
 \section{Introduction}
+
+%TODO: Duidelijk zeggen dat het om een survey gaat, en een duidelijke werkmethodiek introduceren
 
 Microblogging has grown out to become one of the most interesting forms of social media. Its most popular implementation has to be Twitter, 
 where users can share short messages, called tweets, with any other user. These short 140 character messages often contain valuable information about the user, their
@@ -50,7 +55,9 @@ However, certain applications require the analysis of a set of tweets instead of
 of common techniques used to retrieve information from multiple tweets. The conclusion of this paper involves a quick summary of the techniques that
 have been reviewed throughout this paper.
 
-\section{Data}
+\section{Before we start: Retrieving the right data}
+
+%TODO: Duidelijk Scheiden van de rest van het onderzoek
 
 \subsection{Twitter API}
 
@@ -82,6 +89,7 @@ When the above fields are combined, it is possible to create datasets of tweets 
 
 The following of this paper describes algorithms that dive into the big data of Twitter, how to extract useful information from the tweets, and what the information can be applied to.
 
+%TODO: Inhoud is goed, vorm moet gestroomlijnder doorheen hele paper. Ook moet alles vanuit onze method geschreven worden, niet vanuit de papers
 
 \section{Single tweet analysis}
 In this section we will discuss the different types of analysis that can be done on one single tweet. This usually is also the basis for a analysis of a larger amount of tweets or even on a stream of tweets. We will start of by discussing Data enrichment. This part will elaborate on the different techniques to enrich tweets in order to be able to do better analysis on that tweet. After that we will discuss Semantic analysis. In this section an overview is given of different techniques to do a sentiment analysis and how data enrichment can be used to improve the performance.
@@ -258,6 +266,8 @@ In Sakaki et al. their paper a usecase for Event Identification is presented in 
 
 To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. With the above feature set as basis, a system that detects earthquakes using Twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
 \cite{earthq}
+
+%TODO: Opsomming + stap naar toekomstig onderzoek maken
 
 \section{Conclusion}
 In this paper we have tried to give an overview of the studies that have been done on analysis on Twitter and the question that still play in this field of study. We started off by introducing the Twitter API. This is the most important way to get data from Twitter. Here we also introduced all the different concept that can be retrieved from Twitter. 
