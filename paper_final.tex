@@ -92,21 +92,27 @@ Now that we know how and where we should get our data from, we can start to anal
 several different techniques that can extract useful information from these tweets. We distinguish the extraction of features from a single tweet,
 and the analysis of bigger sets of tweets.
 
-\section{Single tweet analysis}
+\section{Techniques to analyse tweets}
 
+%\large
+%\hspace{9mm}\textbf{The analysis of a single tweet} ~
+%\normalsize
+%\newline
 %TODO: Inhoud is goed, vorm moet gestroomlijnder doorheen hele paper. Ook moet alles vanuit onze method geschreven worden, niet vanuit de papers
+
+\section*{Analysing a single tweet}
 
 In this section we will discuss the different types of analysis that can be done on one single tweet. This usually is also the basis for a analysis of a larger amount of tweets or even on a stream of tweets. We will start of by discussing Data enrichment. This part will elaborate on the different techniques to enrich tweets in order to be able to do better analysis on that tweet. After that we will discuss Semantic analysis. In this section an overview is given of different techniques to do a sentiment analysis and how data enrichment can be used to improve the performance.
 \subsection{Data Enrichment}
 At the very basis of the analysis of a tweet is data enrichment. Because the length of a tweet is limited to 140 characters, the users of Twitter use language in creative ways. These ways of communicating makes it sometimes, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans a context is created by linking the concepts from the tweet to earlier acquired knowledge. The same thing can be done by computers. Two stages can be defined in this process, first the extraction of the concepts from the tweet, after that a context can be created by linking the tweet to other sources.
-\subsubsection{Concept Extraction}
+\subsubsection*{Concept Extraction}
 In this paper when we say concepts we mean named entities such as names of locations, people and organizations. To recognize these entities multiple learning algorithms or even combinations of learning algorithms have been proposed. Nowadays the most common are the statistical learning algorithms. Think of algorithms like Maximum Entropy Models, Hidden Markov Models or neural networks. Other proposed algorithms are AdaBoost.MH, employed memory-based learning, transformation-based learning, support vector machines and conditional random fields. All of them in decreasing frequency of use.\cite{EntityRecognition} Florian et al. have shown that combining multiple classifiers can increase the performance, compared to the best performing classifier, by 17-21 \%.\cite{ClassifierCombination} To do this they set up a framework to compare the results of different (combined) classifiers.  
 
 After the entities have been found, labels are assigned to distinguish between a person, an organization or a location. Custom labels are not worth a lot. They can be used in an application that is specially build to handle these labels. To deal with this problem Abel et al. propose to use the RDF (Resource Description Framework).\cite{AdaptiveSearch} By using RDF to represent the data, sources from the Semantic Web (e.g. DBpedia \footnote{http://dbpedia.
 org/}) can now be leveraged to enrich the data because RDF is a Semantic Web standard recommended by the W3C\footnote{http://www.w3.org/RDF/}. Because W3C recommends to use this model, most likely a lot of resources also use this model. This will give a much bigger knowledge base to enrich the data from.
 
 The whole process of building a system to extract concept from a tweet seems to be a lot of work. Fortunately there are services like OpenCalais\footnote{www.opencalais.com}. OpenCalais is a web service that can extract concepts. Not only does it return the entities, it will also return facts and events hidden in the text, which will make the result even more useful.
-\subsubsection{Context Creation}
+\subsubsection*{Context Creation}
 The problem of linking tweets to another source of information poses one the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweets is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times.
 
 Linking to just news articles narrows the problem significantly, however, actually linking the tweets and the new articles still is an issue. Abel et al. propose two main linking strategies, divided into five methods total.
@@ -126,7 +132,7 @@ Using these method a broader context can be created. This still is not much more
 \subsection{Sentiment Analysis}
 Sentiment analysis or opinion mining is, as the Financial Times defines it, "a linguistic analysis technique where a body of text is examined to characterize the tonality of the document."\footnote{http://lexicon.ft.com/Term?term=sentiment-analysis} In other words, the goal of a sentiment analysis is to extract the writers opinion on some topic from a body of text. This body of text can very well be a tweet, and that combined with the popularity of microblogging amongst internet users, makes Twitter a very interesting body of knowledge about the opinion of a large group of people. But in order to get to that knowledge the data has to be analysed fist. 
 The most important and most obvious issue is how to extract an opinion from a tweet. In the next part we will discuss a few ways to extract an opinion from a tweet.
-\subsubsection{Semantics }
+\subsubsection*{Semantics }
 The most important way to extract a sentiment from a tweet is by analysing its semantics. After all, tweets are written text. A sentiment can be assigned to a tweet using machine learning algorithms. Pang et al. \cite{machineLearning} have done a study on three standard machine learning algorithms for sentiment analysis: 
 \begin{enumerate}
 \item \textbf{Naive Bayes} is a fair simple classifier that operates under the assumption that the presents or absence of features does not relate to the presents of any of the other features. Applying that on Twitter with sentiment analysis, gives us $c = \arg\max_{c\in C} P(c|w)$ where $c$ is a sentiment class, $C$ the collection of sentiment classes and $w$ is a tweet. \cite{sentAnalysis}
@@ -136,22 +142,22 @@ The formula is of the form $P(c|d) = \frac{1}{Z(d)}\exp(\Sigma_i \lambda_{i,c}F_
 \end{enumerate}
 It turns out that over the whole the Support Vector Machine performs the best on the sentiment analysis\cite{machineLearning}. The differences, however, are not substantially large. 
 
-\subsubsection{Emoticons}
+\subsubsection*{Emoticons}
 Other than semantical analysis we can also use other data from tweets. A good sentiment indicator are emoticons. Twitter users use emoticons (e.g. ":-)", ":(" or "=(") to indicate their mood.\cite{twitterSentiment} Since the number of emoticons is limited a sentiment can easily be assigned manually. The information from the emoticons can be leveraged in two ways
 \begin{enumerate}
 \item \textbf{Labeling:} The emoticons can be used to assign a sentiment to a tweet. This can be a very useful asset to take into account when assigning a sentiment to a tweet. The emoticons can be considered unigram features for some classifier. There they will be strong evidence for a certain sentiment.
 \item \textbf{Training:} Because of their clear evidence for a sentiment emoticons can also be used to build a training corpus for a supervised learning algorithm. Twitter can be queried for "positive" emoticons and "negative" emoticons and then, by assuming the emoticon reflects the sentiment of message, the tweet can be labelled accordingly.\cite{moodLens} 
 \end{enumerate}
 We now see that emoticons can be used to extract a sentiment from a tweet. However, they are not sufficient to just use emoticons to label the tweets. Simply because not all tweets contain emoticons.
-\subsubsection{Usage}
+\subsubsection*{Usage}
 The possibilities of sentiment analysis are not too hard to imagine. Every company wants to know how their newly launched product is doing, film makes want to know what people think about their new movie and politicians want to know how they are doing for the next elections. Using sentiment analysis all this information will become available as Pang et al. \cite{machineLearning} have shown in their research. They tried to classify documents based on their sentiment. In their research they used movie reviews as documents. They found that a semantical classifier outperforms human classification but compared to topic-based classification, sentiment classification falls behind. So even though there are enough possible applications for sentiment analysis, there is still a lot of room for improvement in this field.
 
-\section{Tweet stream analysis}
+\section*{Analysing a set of tweets}
 What we have seen so far was the analysis on one tweet. This is all very interesting from a computer science point of view. All the different techniques to extract the meaning of a tweet in such a way that it is machine interpretable. However, the real knowledge is in the big data, not in a single tweet. Extracting that knowledge poses a whole new set of problems. In this part we will elaborate on User Classification, Tag Based analysis and Event Identification
 
 \subsection{User Classification}
 User classification is the problem of the classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In the first part of this chapter we will discuss User Models, whereas in the second part we will discuss some features used to classify users. We will also discuss how well these features can be used to classify users. At the end of this a practical use for these techniques and features is shown. 
-\subsubsection{User Models}
+\subsubsection*{User Models}
 Before it is possible to classify a user, it is useful to create a model of a user. A user model can vary in three ways. It can vary in the type of profile, the data sources used to enrich the profiles and some temporal constraints. A user profile can be represented by $P(u) = \{(c, w(u,c))| c \in C, u \in U\}$. In this formula $u$ is a user in the set of user $U$ and $c$ is a concept in the set of concepts $C$ is a concept In their paper F. Abel et al compare the following three ways to create a user Profile \cite{usermodel}:
 \begin{itemize}
 \item Hashtag-based
@@ -161,7 +167,7 @@ Before it is possible to classify a user, it is useful to create a model of a us
 After all these approaches are used on the same dataset it appears that the variety of entity-based profiles was much higher than the hashtag based approach. The number of distinct profile facets was higher than 10 in 99\% of the entity base profiles. Furthermore Entity \& Topic-based profile tends to have a more explicit semantic.  \cite{usermodel} Furthermore the hashtag-based approach fails to create a profile for 5.5\% of the users where the other approaches don't have this problem. 
 
 
-\subsubsection{Classification Features}
+\subsubsection*{Classification Features}
 While classifying users people are trying to discriminate between users. But to discriminate between users it is useful to know where to discriminate on. What are the best ways to classify a user? A lot of research has been done on classification In this section we will discuss some features, their accuracy and the way they can be used to classify a user. 
 
 Classifying users by the topic they talk about seems a natural idea. Linguistics can say a lot about the interests of a user. One way to classify a user using linguistics is done by using Prototypical Words(PW's). \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. (e.g. younger people will probably use terms like "lol" and "yolo" more than older users). To define prototypical words for i classes the probability that a user of class $c_i$ will use word $w$ needs to be calculated. Given n classes and some seed users $S_i$ this probability is calculated using the following formula: $proto(w, c_i) = \frac{|w, S_i|}{\sum_{j=1}^n |w, S_j|}$.  In a Twitter-context Prototypical Hashtags can be used in the same way which perform better to classify a user on Twitter than prototypical words.
@@ -176,7 +182,10 @@ A maybe strange, but useful way to classify users is their   Tweeting behavior i
 
 
 
-\subsubsection{Usecase: Predicting Political Preferences}
+\subsubsection*{Usecase: Predicting Political Preferences}
+
+%TODO: Add to new chapter
+
 During election time it can be useful to predict the political preferences of a user. In Makazhanov \& Raﬁei's paper a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. \cite{pol} To achieve this (political) hashtags in combination with Twitter activities is used. To know if a user mentions an account of an election candidate a number of these accounts are scraped semi-automaticall. This resulted in the collection of 181972 tweets about politics.\cite{pol}
 
 Before processing these tweets non-personal and spam accounts had to be filtered. Using multiple techniques spam was filtered, but after filtering only 0.3\% of the accounts were labeled as spam. After a manual check none of these accounts seemed to be a spammer. But after removing spam accounts there are still some Non-Personal(NP)-accounts(e.g Businesses, official entities and News Papers)  that should be removed before processing the data. This is mostly done by using the provided profile information and filtering on city names in the user names.  \cite{pol}
@@ -234,7 +243,7 @@ Event identification is the problem of identifying events(e.g. concerts, festiva
 
 To identify an event using an algorithm, a definition of an event is needed. Becker et al.  define an event as: "a real world occurrence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the occurrence and published during time $T_e$." \cite{eventident} 
 
-\subsubsection{Event Identification Issues}
+\subsubsection*{Event Identification Issues}
 Event identification has two main problem. (1) separating the content and non-event content in the constantly changing 
 Twitter-environment (2) Aligning tweets about an event with their respective event. In this section we will discuss these two problems and present a solution for them.
 \\\\ 
@@ -265,11 +274,17 @@ At first the data is enriched, Twitter exposes the data using different formats 
 After this a Feature Vector is composed, for tweets all stop words are removed from the bag of words a tweet is represented as. Furthermore all stopwords are removed and everything is normalized to lowercase. \cite{eventalign} 
 
 Then a labelling function is used to label the event, two types of labelling functions are tested. (1) Proximity-based Clustering (PbC) (2) Naive Bayes. PbC is an algorithm similar to K-means with k already known. The collection of tweets $X$ is observed and the class is returned for which the distance of between an event it's mean and the tweet vector is minimized. The Naive Bayes approach uses the formula $y = \arg\max_{y \in Y} P(y)\prod_i P(x_i, y)$ to assign the most probable class label $y \in Y$ to tweet $x$. The Naive Bayes approach outperforms PbC for all feature sets.  \cite{eventalign}
-\subsubsection{Usecase: Earthquake Detection}
+\subsubsection*{Usecase: Earthquake Detection}
+
+%TODO: Add to new chapter
+
 In Sakaki et al. their paper a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} They consider Twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
 
 To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. With the above feature set as basis, a system that detects earthquakes using Twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
 \cite{earthq}
+
+\section{Applications that use tweet analysing techniques}
+
 
 %TODO: Opsomming + stap naar toekomstig onderzoek maken
 
