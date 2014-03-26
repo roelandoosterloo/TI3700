@@ -41,6 +41,9 @@ for a variety of applications to be created using this information.
 
 %TODO: Duidelijk zeggen dat het om een survey gaat, en een duidelijke werkmethodiek introduceren
 
+
+
+
 Microblogging has grown out to become one of the most interesting forms of social media. Its most popular implementation has to be Twitter, 
 where users can share short messages, called tweets, with any other user. These short 140 character messages often contain valuable information about the user, their
 interests, opinions, etc. This information can be very useful for a variety of applications, making social web data analytics an important field within
@@ -57,16 +60,16 @@ have been reviewed throughout this paper.
 
 \section{Before we start: Retrieving the right data}
 
-%TODO: Duidelijk Scheiden van de rest van het onderzoek
+Before we can research anything, we need the appropriate data to base our analysis on. The Twitter API, short for Application Programming Interface, is an
+interaction tool created by Twitter itself. It allows anyone to interact with their database through a set of commands published on their developer domain \cite{TwitterDev}.
+Researchers can use the API to create structures that can fetch tweets that satisfy a certain specification of their interest by manipulating the fields that
+the API uses to identify tweets and their content. If their research demands a more random tweet approach, a sample stream of random tweets can also be 
+obtained through these commands. Any researcher that has the intention of interacting with Twitter's database should familiarise him or herself with the 
+commands and the naming of the attributes used by the API. Following are some examples of possible commands.
 
-\subsection{Twitter API}
-
-When Twitter was founded, the creators chose to adopt an API (Application Programming Interface) for third party developers. This has proven to be very
-beneficial to both Twitter's popularity and a lot of its users, including researchers. An overview of the API structure and some useful fields\cite{TwitterDev}:
-
-\begin{enumerate}
+\begin{itemize}
 \item \textbf{Tweets} The short messages consisting of 140 characters sent by users
-	\subitem \textbf{coordinates} Returns the longitude and latitude position from where a specified tweet has been sent
+	\subitem \textbf{coordinates} Returns the longitude and latitude from where a tweet has been sent
 	\subitem \textbf{entities} Returns the entities (url, hashtag, etc.) that are embedded into the tweet
 	\subitem \textbf{lang} Returns the language in which a tweet has been sent
 	\subitem \textbf{user} Returns the user that sent a tweet
@@ -83,15 +86,17 @@ beneficial to both Twitter's popularity and a lot of its users, including resear
 	\subitem \textbf{country} Returns the country associated with a place
 	\subitem \textbf{full\_name} Returns the full name of a place, for example Kanses ``City, Kansas''
 	\subitem \textbf{place\_type} Returns the type of a place, for example ``city''
-\end{enumerate}
+\end{itemize}
 
-When the above fields are combined, it is possible to create datasets of tweets that fulfil a certain specification. These sets can then be used to extract specific information. However, defining your own dataset may introduce a certain bias, and sometimes you need a random sample of tweets to analyse. For this purpose, Twitter has a streaming function that third party developers can tap into to retrieve random tweets. Unfortunately, the Twitter stream can only retrieve tweets that are less than a few days old.
+Now that we know how and where we should get our data from, we can start to analyse their content. The following 2 sections will illustrate
+several different techniques that can extract useful information from these tweets. We distinguish the extraction of features from a single tweet,
+and the analysis of bigger sets of tweets.
 
-The following of this paper describes algorithms that dive into the big data of Twitter, how to extract useful information from the tweets, and what the information can be applied to.
+
+\section{Single tweet analysis}
 
 %TODO: Inhoud is goed, vorm moet gestroomlijnder doorheen hele paper. Ook moet alles vanuit onze method geschreven worden, niet vanuit de papers
 
-\section{Single tweet analysis}
 In this section we will discuss the different types of analysis that can be done on one single tweet. This usually is also the basis for a analysis of a larger amount of tweets or even on a stream of tweets. We will start of by discussing Data enrichment. This part will elaborate on the different techniques to enrich tweets in order to be able to do better analysis on that tweet. After that we will discuss Semantic analysis. In this section an overview is given of different techniques to do a sentiment analysis and how data enrichment can be used to improve the performance.
 \subsection{Data Enrichment}
 At the very basis of the analysis of a tweet is data enrichment. Because the length of a tweet is limited to 140 characters, the users of Twitter use language in creative ways. These ways of communicating makes it sometimes, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans a context is created by linking the concepts from the tweet to earlier acquired knowledge. The same thing can be done by computers. Two stages can be defined in this process, first the extraction of the concepts from the tweet, after that a context can be created by linking the tweet to other sources.
