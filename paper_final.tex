@@ -1,0 +1,302 @@
+\documentclass{article}
+\usepackage{a4wide}
+
+\usepackage{cite}
+
+
+
+%% if your are not using LaTeX2e use instead
+%% \documentstyle[bnaic]{article}
+
+%% begin document with title, author and affiliations
+
+\title{Seminarium TI 3700\\ Data Analysis on Twitter: An Overview}
+\author{A. Hambenne  \and
+    O. Maas \and
+    R. Oosterloo}
+\date{}
+
+\pagestyle{empty}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+
+%TODO: Dieper ingaan op onderwerpen, 'abstract' is enkel van toepassing op de paper, niet de onderwerpen
+
+Twitter is a popular microblogging website that allows users to share 140 character messages (tweets) with the rest of the world.
+The analysis of such messages has become its own field within information technology, with a range of techniques that all share the same cause:
+extracting useful information from these messages. This paper serves as an introduction to the research that has been done analysing tweets from Twitter,
+covering the API and a series of common techniques. One of the key factors that contribute to successful extraction is data enrichment, or somehow enhancing
+the intended information from a tweet. This can be done by several techniques, yet this paper's scope limits to concept analysis and sentiment analysis.
+When a stream of tweets is available for analysis, other techniques such as user classification, tag-based analysis and event identification offer valuable
+insights into the behaviour of users on Twitter. All these techniques allow researchers to extract interesting information from Twitter activity, and allow
+for a variety of applications to be created using this information.
+\end{abstract}
+
+
+\section{Introduction}
+
+%TODO: Duidelijk zeggen dat het om een survey gaat, en een duidelijke werkmethodiek introduceren
+
+
+
+
+Microblogging has grown out to become one of the most interesting forms of social media. Its most popular implementation has to be Twitter, 
+where users can share short messages, called tweets, with any other user. These short 140 character messages often contain valuable information about the user, their
+interests, opinions, etc. This information can be very useful for a variety of applications, making social web data analytics an important field within
+information technology. One of the biggest challenges is finding a way to extract the intended information from these tweets. 
+
+This paper is dedicated to giving an overview of successful techniques and useful applications of these social web data analytics. 
+We will build up from the basic techniques used by developers to collect tweets, to effective techniques that extract useful information from them. 
+In the first following section the Twitter API will be evaluated, which will show that the platform offers useful tools and commands to retrieve 
+specific datasets, or even a completely random sample stream of tweets. Once Twitter's API has been evaluated, a first series of techniques will be introduced
+that focus on the analysis of a single tweet. These techniques offer insight in how machines and algorithms are being used to infer meaning from a tweet.
+However, certain applications require the analysis of a set of tweets instead of just a single one. The final chapter is therefore dedicated to the explanation\
+of common techniques used to retrieve information from multiple tweets. The conclusion of this paper involves a quick summary of the techniques that
+have been reviewed throughout this paper.
+
+\section{Before we start: Retrieving the right data}
+
+Before we can research anything, we need the appropriate data to base our analysis on. The Twitter API, short for Application Programming Interface, is an
+interaction tool created by Twitter itself. It allows anyone to interact with their database through a set of commands published on their developer domain \cite{TwitterDev}.
+Researchers can use the API to create structures that can fetch tweets that satisfy a certain specification of their interest by manipulating the fields that
+the API uses to identify tweets and their content. If their research demands a more random tweet approach, a sample stream of random tweets can also be 
+obtained through these commands. Any researcher that has the intention of interacting with Twitter's database should familiarise him or herself with the 
+commands and the naming of the attributes used by the API. Following are some examples of possible commands.
+
+\begin{itemize}
+\item \textbf{Tweets} The short messages consisting of 140 characters sent by users
+	\subitem \textbf{coordinates} Returns the longitude and latitude from where a tweet has been sent
+	\subitem \textbf{entities} Returns the entities (url, hashtag, etc.) that are embedded into the tweet
+	\subitem \textbf{lang} Returns the language in which a tweet has been sent
+	\subitem \textbf{user} Returns the user that sent a tweet
+\item \textbf{Users} The users that send the tweets
+	\subitem \textbf{description} Returns the description that the user defined for his account
+	\subitem \textbf{location} Returns the location that the user defined for his account
+	\subitem \textbf{status} Returns, if possible, the user's latest tweet
+\item \textbf{Entities} Images, hashtags and other entities that tweets can hold
+	\subitem \textbf{hashtags} Returns the hashtags that have been parset out of a tweet
+	\subitem \textbf{media} Returns the media that is associated with a tweet
+	\subitem \textbf{urls} Returns the urls embedded in a tweet
+	\subitem \textbf{user\_mentions} Returns the users that have been mentioned in a tweet
+\item \textbf{Places} Predefined places on Twitter that users can associate with
+	\subitem \textbf{country} Returns the country associated with a place
+	\subitem \textbf{full\_name} Returns the full name of a place, for example Kanses ``City, Kansas''
+	\subitem \textbf{place\_type} Returns the type of a place, for example ``city''
+\end{itemize}
+
+Now that we know how and where we should get our data from, we can start to analyse their content. The following 2 sections will illustrate
+several different techniques that can extract useful information from these tweets. We distinguish the extraction of features from a single tweet,
+and the analysis of bigger sets of tweets.
+
+\section{Single tweet analysis}
+
+%TODO: Inhoud is goed, vorm moet gestroomlijnder doorheen hele paper. Ook moet alles vanuit onze method geschreven worden, niet vanuit de papers
+
+In this section we will discuss the different types of analysis that can be done on one single tweet. This usually is also the basis for a analysis of a larger amount of tweets or even on a stream of tweets. We will start of by discussing Data enrichment. This part will elaborate on the different techniques to enrich tweets in order to be able to do better analysis on that tweet. After that we will discuss Semantic analysis. In this section an overview is given of different techniques to do a sentiment analysis and how data enrichment can be used to improve the performance.
+\subsection{Data Enrichment}
+At the very basis of the analysis of a tweet is data enrichment. Because the length of a tweet is limited to 140 characters, the users of Twitter use language in creative ways. These ways of communicating makes it sometimes, even for humans, hard to understand what a tweet is about. To get a better understanding of the meaning of a tweet, a context is needed. For humans a context is created by linking the concepts from the tweet to earlier acquired knowledge. The same thing can be done by computers. Two stages can be defined in this process, first the extraction of the concepts from the tweet, after that a context can be created by linking the tweet to other sources.
+\subsubsection{Concept Extraction}
+In this paper when we say concepts we mean named entities such as names of locations, people and organizations. To recognize these entities multiple learning algorithms or even combinations of learning algorithms have been proposed. Nowadays the most common are the statistical learning algorithms. Think of algorithms like Maximum Entropy Models, Hidden Markov Models or neural networks. Other proposed algorithms are AdaBoost.MH, employed memory-based learning, transformation-based learning, support vector machines and conditional random fields. All of them in decreasing frequency of use.\cite{EntityRecognition} Florian et al. have shown that combining multiple classifiers can increase the performance, compared to the best performing classifier, by 17-21 \%.\cite{ClassifierCombination} To do this they set up a framework to compare the results of different (combined) classifiers.  
+
+After the entities have been found, labels are assigned to distinguish between a person, an organization or a location. Custom labels are not worth a lot. They can be used in an application that is specially build to handle these labels. To deal with this problem Abel et al. propose to use the RDF (Resource Description Framework).\cite{AdaptiveSearch} By using RDF to represent the data, sources from the Semantic Web (e.g. DBpedia \footnote{http://dbpedia.
+org/}) can now be leveraged to enrich the data because RDF is a Semantic Web standard recommended by the W3C\footnote{http://www.w3.org/RDF/}. Because W3C recommends to use this model, most likely a lot of resources also use this model. This will give a much bigger knowledge base to enrich the data from.
+
+The whole process of building a system to extract concept from a tweet seems to be a lot of work. Fortunately there are services like OpenCalais\footnote{www.opencalais.com}. OpenCalais is a web service that can extract concepts. Not only does it return the entities, it will also return facts and events hidden in the text, which will make the result even more useful.
+\subsubsection{Context Creation}
+The problem of linking tweets to another source of information poses one the biggest issue in data enrichment. The tweets themselves do not provide much information. Fortunately, Kwak et al. have shown that the topic of over 85\% of the of the tweets is related to news \cite{newsmedia}. This knowledge can be leveraged to create a context for most of the tweets.  This is what Abel et al. proposed to do\cite{enrichmentForProfiling}. They linked tweets to mainstream news networks like CNN, BBC and New York Times.
+
+Linking to just news articles narrows the problem significantly, however, actually linking the tweets and the new articles still is an issue. Abel et al. propose two main linking strategies, divided into five methods total.
+\begin{enumerate}
+\item \textbf{URL-based Strategy}\\
+This strategy is based upon the observation that many tweets contains URLs. Usually these URLs refer to news articles the tweets are closely related to. Two URL-based strategies are proposed
+	\subitem \textbf{Strict URL-based} defines an article $a$ and a tweet $t$ to be related when $t$ contains an URL to $a$.
+	\subitem \textbf{Lenient URL-based}, this method is an extension of the strict URL-based method. This extension entails that if a tweet $t$ has a link to an article $a$, all tweets that are retweeting $t$ are considered linked to $a$. The same counts for tweets that are in responds to $t$. These tweets will also be considered linked to $a$.
+\item \textbf{Content-based Strategy}\\
+Content-based strategies rely on the idea of finding as much similarity as possible between the content of a tweet and the content of a news article. The most similar tweet-article pair is considered to be related and therefore they are linked.
+	\subitem \textbf{Bag of Words}, in this method a tweet is represented as a vector of word frequencies. For a news article we can also create a vector the represent it. To link an article to a tweet we need to calculate the similarity between the tweet and the article and pick the one with the highest similarity. The similarity is calculated by the $TF \times IDF$ (Term Frequency times Inverse Document Frequency): the number of times a word from the tweet occurs in a news article, multiplied by the logarithm of the total number of articles over the number of articles the word occurs in. \cite{tfidf}
+	\subitem \textbf{Hashtag-based} is based upon the same concept as the Bag of words method. The difference is that we do not consider the words in the article, instead we only use the hashtags in the representation of a tweet to calculate the $TF \times IDF$ with.
+	\subitem \textbf{Entity-based} is also based upon the Bag of words method. The entity-based method does not consider words in an article. It relies on the entities that are mentioned in the article to make a vector to represent the article. 
+\end{enumerate}
+Using these method a broader context can be created. This still is not much more useful than the tweet on its own. For the article to be actually useful the topics of the articles have to be extracted. To do this Natural Language Processing and machine learning can be used to extract the entities from the article.  
+
+\subsection{Sentiment Analysis}
+Sentiment analysis or opinion mining is, as the Financial Times defines it, "a linguistic analysis technique where a body of text is examined to characterize the tonality of the document."\footnote{http://lexicon.ft.com/Term?term=sentiment-analysis} In other words, the goal of a sentiment analysis is to extract the writers opinion on some topic from a body of text. This body of text can very well be a tweet, and that combined with the popularity of microblogging amongst internet users, makes Twitter a very interesting body of knowledge about the opinion of a large group of people. But in order to get to that knowledge the data has to be analysed fist. 
+The most important and most obvious issue is how to extract an opinion from a tweet. In the next part we will discuss a few ways to extract an opinion from a tweet.
+\subsubsection{Semantics }
+The most important way to extract a sentiment from a tweet is by analysing its semantics. After all, tweets are written text. A sentiment can be assigned to a tweet using machine learning algorithms. Pang et al. \cite{machineLearning} have done a study on three standard machine learning algorithms for sentiment analysis: 
+\begin{enumerate}
+\item \textbf{Naive Bayes} is a fair simple classifier that operates under the assumption that the presents or absence of features does not relate to the presents of any of the other features. Applying that on Twitter with sentiment analysis, gives us $c = \arg\max_{c\in C} P(c|w)$ where $c$ is a sentiment class, $C$ the collection of sentiment classes and $w$ is a tweet. \cite{sentAnalysis}
+\item \textbf{Maximum Entropy} is a model that, unlike Bayes, does not make an independence assumption. It operates under the philosophy that "we should choose the model making the fewest assumptions about the data while still remaining consistent with it".\cite{machineLearning} \\
+The formula is of the form $P(c|d) = \frac{1}{Z(d)}\exp(\Sigma_i \lambda_{i,c}F_{i,c}(d,c))$, where $Z(d)$ is a normalization function, $\lambda_{i,c}$ a weighted vector determining the significance of the feature and $F_{i,c}$ is a class/feature function. 
+\item \textbf{Support Vector Machine} is fundamentally different from Naive Bayes and Max Entropy because it is not a probabilistic model. The basic idea behind a support vector machine is that a vector is trained to separate the sentiments. Not only will it separate the training data, it will do so at the largest possible margin. 
+\end{enumerate}
+It turns out that over the whole the Support Vector Machine performs the best on the sentiment analysis\cite{machineLearning}. The differences, however, are not substantially large. 
+
+\subsubsection{Emoticons}
+Other than semantical analysis we can also use other data from tweets. A good sentiment indicator are emoticons. Twitter users use emoticons (e.g. ":-)", ":(" or "=(") to indicate their mood.\cite{twitterSentiment} Since the number of emoticons is limited a sentiment can easily be assigned manually. The information from the emoticons can be leveraged in two ways
+\begin{enumerate}
+\item \textbf{Labeling:} The emoticons can be used to assign a sentiment to a tweet. This can be a very useful asset to take into account when assigning a sentiment to a tweet. The emoticons can be considered unigram features for some classifier. There they will be strong evidence for a certain sentiment.
+\item \textbf{Training:} Because of their clear evidence for a sentiment emoticons can also be used to build a training corpus for a supervised learning algorithm. Twitter can be queried for "positive" emoticons and "negative" emoticons and then, by assuming the emoticon reflects the sentiment of message, the tweet can be labelled accordingly.\cite{moodLens} 
+\end{enumerate}
+We now see that emoticons can be used to extract a sentiment from a tweet. However, they are not sufficient to just use emoticons to label the tweets. Simply because not all tweets contain emoticons.
+\subsubsection{Usage}
+The possibilities of sentiment analysis are not too hard to imagine. Every company wants to know how their newly launched product is doing, film makes want to know what people think about their new movie and politicians want to know how they are doing for the next elections. Using sentiment analysis all this information will become available as Pang et al. \cite{machineLearning} have shown in their research. They tried to classify documents based on their sentiment. In their research they used movie reviews as documents. They found that a semantical classifier outperforms human classification but compared to topic-based classification, sentiment classification falls behind. So even though there are enough possible applications for sentiment analysis, there is still a lot of room for improvement in this field.
+
+\section{Tweet stream analysis}
+What we have seen so far was the analysis on one tweet. This is all very interesting from a computer science point of view. All the different techniques to extract the meaning of a tweet in such a way that it is machine interpretable. However, the real knowledge is in the big data, not in a single tweet. Extracting that knowledge poses a whole new set of problems. In this part we will elaborate on User Classification, Tag Based analysis and Event Identification
+
+\subsection{User Classification}
+User classification is the problem of the classification of users based on (1) their metadata such as age, location and job and (2) the tweets a user has posted. In the first part of this chapter we will discuss User Models, whereas in the second part we will discuss some features used to classify users. We will also discuss how well these features can be used to classify users. At the end of this a practical use for these techniques and features is shown. 
+\subsubsection{User Models}
+Before it is possible to classify a user, it is useful to create a model of a user. A user model can vary in three ways. It can vary in the type of profile, the data sources used to enrich the profiles and some temporal constraints. A user profile can be represented by $P(u) = \{(c, w(u,c))| c \in C, u \in U\}$. In this formula $u$ is a user in the set of user $U$ and $c$ is a concept in the set of concepts $C$ is a concept In their paper F. Abel et al compare the following three ways to create a user Profile \cite{usermodel}:
+\begin{itemize}
+\item Hashtag-based
+\item Entity-based
+\item Topic-based
+\end{itemize}
+After all these approaches are used on the same dataset it appears that the variety of entity-based profiles was much higher than the hashtag based approach. The number of distinct profile facets was higher than 10 in 99\% of the entity base profiles. Furthermore Entity \& Topic-based profile tends to have a more explicit semantic.  \cite{usermodel} Furthermore the hashtag-based approach fails to create a profile for 5.5\% of the users where the other approaches don't have this problem. 
+
+
+\subsubsection{Classification Features}
+While classifying users people are trying to discriminate between users. But to discriminate between users it is useful to know where to discriminate on. What are the best ways to classify a user? A lot of research has been done on classification In this section we will discuss some features, their accuracy and the way they can be used to classify a user. 
+
+Classifying users by the topic they talk about seems a natural idea. Linguistics can say a lot about the interests of a user. One way to classify a user using linguistics is done by using Prototypical Words(PW's). \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. (e.g. younger people will probably use terms like "lol" and "yolo" more than older users). To define prototypical words for i classes the probability that a user of class $c_i$ will use word $w$ needs to be calculated. Given n classes and some seed users $S_i$ this probability is calculated using the following formula: $proto(w, c_i) = \frac{|w, S_i|}{\sum_{j=1}^n |w, S_j|}$.  In a Twitter-context Prototypical Hashtags can be used in the same way which perform better to classify a user on Twitter than prototypical words.
+
+Another way to classify a user can be the people they interact with. Users their interaction is used by Makazhanov \& Raﬁei to capture interactions between users and other accounts. \cite{pol} An interaction is a retweet or a reply. It is also possible to use friend accounts as a measurement in interaction between users.  A friend account of user $x$ is an account that is followed by user $y$. In the same way as prototypical words are calculated prototypical replies and retweets can be calculated to classify a user. (e.g. a democrat may tend to retweet a message from a democratic candidate) \cite{userclasst}
+
+Maybe it could be an idea to classify people on the terms they use. Interaction Profiles are used to capture class-specific topics. Makazhanov \& Raﬁei use the following definition to get party specific terms for each party in an election: Given a set $C$ of candidates, we associate with each candidate $c \in C$ a document $d_c$ is modelled as a bag of words. Let $D = \{d_c| c \in C\}$ and for each party $p \in P$, $D_p = \{d_c | c $ is a member of $p\}$ \cite{pol}. To generate a Language Model (LM) divergence between the LM probability of a term in a party and the LM probability of all parties is used. With these probabilities for each term an importance score $I(t,p)$ is calculated to define the importance of term $t$ for party $p$. The higher the score the more it deviates from the normal election-tweets. \cite{pol}. To build the interaction profiles the top 100 terms for each party are included in a bag of words. 
+
+In real life people are also classified on their hometown, their age and their gender. Can this be achieved on Twitter using the profile information.  Profile information can be helpful to bootstrap the classification of a user, but it should be used with care due to the amount of inconsistent, incorrect and sometimes bogus information (e.g an non-existent hometown). Research has shown that 80\% of the users provides a location and 48\% of the users provides a short bio. \cite{usermachine} It is was possible to extract a gender for 80\% of the users, but with a very low accuracy. Only in 0.1\% of the cases the researchers where able to extract an etnicity. The profile picture/avatar of Twitter users can be misleading in 20\% of the found profile pictures not the owner was in the picture was but another person such as a celebrity.  \cite{usermachine}
+
+A maybe strange, but useful way to classify users is their   Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Features such as the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to Pennacchiotti \& Popescu these features are useful but not really discriminative. \cite{userclasst} 
+
+
+
+\subsubsection{Usecase: Predicting Political Preferences}
+During election time it can be useful to predict the political preferences of a user. In Makazhanov \& Raﬁei's paper a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. \cite{pol} To achieve this (political) hashtags in combination with Twitter activities is used. To know if a user mentions an account of an election candidate a number of these accounts are scraped semi-automaticall. This resulted in the collection of 181972 tweets about politics.\cite{pol}
+
+Before processing these tweets non-personal and spam accounts had to be filtered. Using multiple techniques spam was filtered, but after filtering only 0.3\% of the accounts were labeled as spam. After a manual check none of these accounts seemed to be a spammer. But after removing spam accounts there are still some Non-Personal(NP)-accounts(e.g Businesses, official entities and News Papers)  that should be removed before processing the data. This is mostly done by using the provided profile information and filtering on city names in the user names.  \cite{pol}
+
+After all the preprocessing a one vs all classifier is trained to classify the users. This classifier will recognize one political party vs all other political parties. The classifier will give a confidence score how likely the user will belong to a party. Then all these scores are compared and the user will probably prefer the party with the highest score.  \cite{pol}
+\subsection{Tag Based Analysis}
+
+Twitter allows their users to contribute their own social annotations to their tweets in the form of tags. These tags can be arbitrarily generated by users 
+which make them hold interesting information about both the tweet and the user that posted it. There are two dominant techniques that are currently being
+used by researchers to model the information of tagged based analysis, The Linear-Weighted Hybrid Model, and the Pair-wise Interaction Tensor Factorisation Model\cite{TagBased}.
+
+\begin{enumerate}
+\item \textbf{Linear-Weighted Hybrid}\\
+
+The Linear-Weighted Hybrid model uses the tags as recommendation components whose output is a weighted sum of components $\kappa_1$ through $\kappa_k$. 
+Each component $\kappa_i$ has its own value between 0 and 1 computed by the function $\phi_i (u,q,r)$, and a corresponding weight $\alpha_i$, also between
+0 and 1. The sum of all weights $\alpha_i$ has to be 1.
+
+Therefore, the hybrid model is defined as the function $\varphi (u, q, r) = \sum\limits_{i = 1}^k \alpha_i \phi_i (u,q,r)$
+
+All weights $\alpha_i$ are then computed by applying a random-restart hill climbing technique. A subset is used as a holdout set, and a vector gets created with random weights that sum to 1. The recommender then modifies the vector over the holdout set to train the algorithm until it reaches a stable point. The algorithm then restarts to avoid local minima.
+
+\item \textbf{Pair-Wise Interaction Tensor Factorization} 
+
+The Pair-Wise Interaction Tensor Factorisation is a state-of-the-art algorithm that has been developed for the purpose of tag-based recommendation systems. The model can be adapted to compute recommendations from tags used by Twitter. The adaptation involves changing the roles of resources and tags with respect to each other.
+	
+This model is restricted in a way because its output is a set of matrices that illustrates a special case of the Tucker decomposition of a tensor. The tensor is not directly linked to the dataset, but rather implies a ranking. It is therefore only useful in the case of tag-based resource recommendation, and not for resource recommendations with other requirements.
+	
+To build the model, the data has to be observed in the form $(u, r+, r-, t)$ where $(u, r+, t)$ and $(u, r-, t)$ is a triple respectively
+found and not found in the dataset. A ranking function is then used to prefer positive examples over negative ones. An iterative gradient-descent
+algorithm is used to optimize this function. All four matrices will be updated until they converge. The matrices represent the factor-reduced components
+of the specialised tensor factorization:
+
+$M = U_k R_k^U + T_k R_k^T$
+
+Where 
+\begin{itemize}
+ \item $U_k$ the user factorization
+ \item $T_k$ is the tag factor matrix
+ \item $R_k^U$ is the resource factor matrix with respect to the users
+ \item $R_k^T$ is the resource factor matrix with respect to the tags
+ \item $k$ selected number of factors
+ \item $M$ the personalized resource-ranking tensor
+\end{itemize}
+
+The relevance score of a resource can now be calculated by:
+
+$\phi (u, \{t\}, r) = \sum_{i=1}^k U_k[u][i]R_k^U[r][i] + T_k[t][i]R_k^T[r][i]$	
+\end{enumerate}
+
+
+\subsection{Event identification}
+
+Event identification is the problem of identifying events(e.g. concerts, festivals and incidents) in a Twitter-stream. The events identified range from Worldwide to local events. Twitter-messages related to an event can be a useful source of information as they often spread news earlier than the 'old' media (e.g News Papers and News Sites).
+
+To identify an event using an algorithm, a definition of an event is needed. Becker et al.  define an event as: "a real world occurrence $e$ with (1) an associated Time Period $T_e$ and (2) a time-ordered stream of Twitter messages $M_e$, of substantial volume, discussing the occurrence and published during time $T_e$." \cite{eventident} 
+
+\subsubsection{Event Identification Issues}
+Event identification has two main problem. (1) separating the content and non-event content in the constantly changing 
+Twitter-environment (2) Aligning tweets about an event with their respective event. In this section we will discuss these two problems and present a solution for them.
+\\\\ 
+\textbf{Separation of Event and Non-event Content}\\
+Because not all tweets on Twitter are event content, a separation of Event and Non-event content is done prior of identifying events. To achieve this separation, Becker et al.  use an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing Twitter-environment. \cite{eventident} 
+
+After the clustering a number of features is used to distinguish between event and non-event clusters. The following features can be used to identify an event cluster. \cite{eventident} 
+\begin{itemize}
+  \item Temporal: The characteristics of the volume over the time $T_e$ associated with an event. 
+  \item Social: The interactions between users(e.g. retweets, replies and mentions) during events could differ from other activities. 
+  \item Topical: Tweets about events tend to center more around one central topic. Furthermore messages in event clusters are more likely to share one or more event-specific key-terms.  
+  \item Twitter-centric: Some activities behave like an event but are Twitter-centric.(e.g. Tweets like 'Goodmorning!') These activities need to be filtered because a classifier might identify it as an event. 
+\end{itemize}
+
+With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit"\footnote{http://www.cs.waikato.ac.nz/ml/weka/}, in the second classifier the  Naive-Bayes technique is used. The first classifier outperforms the second classifier in the separation of event and non-event clusters. \cite{eventident}
+\\\\
+\textbf{Aligning Tweets with an Event} \\
+On average thousands of tweets are sent every minute using Twitter(\footnote{https://blog.twitter.com/2013/new-tweets-per-second-record-and-how}) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. Rowe \& Stankovic try to create an automated mapping solution for this problem using semantics. \cite{eventalign}
+
+
+At first the data is enriched, Twitter exposes the data using different formats such as JSON and XML. To make this data more machine readable then they enrich the data with semantics, after this process the data can then  be used as linked data which is more machine readable. After this process multiple techniques are used to align a tweet with the respective event. The first technique used by them is Feature Extraction. \cite{eventalign} The following three featuresets are used:
+\begin{itemize}
+
+  \item Immediate Resource Leaves: Use only the URI which are most indicative of an event. This feature only uses literals and resources within the URI of an event. 
+  \item 1-Step Resource Leaves: Use all literals and resources within 1 step from the URI of an event. 
+  \item DBPedia Concepts: Also uses all the concepts from DBPedia, the machine readable version of Wikipedia.
+\end{itemize}
+After this a Feature Vector is composed, for tweets all stop words are removed from the bag of words a tweet is represented as. Furthermore all stopwords are removed and everything is normalized to lowercase. \cite{eventalign} 
+
+Then a labelling function is used to label the event, two types of labelling functions are tested. (1) Proximity-based Clustering (PbC) (2) Naive Bayes. PbC is an algorithm similar to K-means with k already known. The collection of tweets $X$ is observed and the class is returned for which the distance of between an event it's mean and the tweet vector is minimized. The Naive Bayes approach uses the formula $y = \arg\max_{y \in Y} P(y)\prod_i P(x_i, y)$ to assign the most probable class label $y \in Y$ to tweet $x$. The Naive Bayes approach outperforms PbC for all feature sets.  \cite{eventalign}
+\subsubsection{Usecase: Earthquake Detection}
+In Sakaki et al. their paper a usecase for Event Identification is presented in the form of a earthquake detection system. \cite{earthq} They consider Twitter users as sensors. If enough sensors are activated (Tweets sent by a user are classified as a tweet about an earthquake), it is likely that an earthquake is occurring. 
+
+To distinguish between tweets about Earthquakes a number of features is used. (1) The number of words in a tweet (2) The words in a tweet (3) Word context features. Feature (1) is a surprisingly good way to classify tweets about earthquakes, especially if it is used with a big amount of users. With the above feature set as basis, a system that detects earthquakes using Twitter was built. After the system detects an earthquake an email to all users is sent. The system was used during 18. august - 2 September. In this time period 10 earthquakes had occurred, all of these earthquakes were detected. Furthermore Sakaki et al. their system detects an earthquake 10 minutes after happening and sends a message within a minute after detection. 
+\cite{earthq}
+
+%TODO: Opsomming + stap naar toekomstig onderzoek maken
+
+\section{Conclusion}
+In this paper we have tried to give an overview of the studies that have been done on analysis on Twitter and the question that still play in this field of study. We started off by introducing the Twitter API. This is the most important way to get data from Twitter. Here we also introduced all the different concept that can be retrieved from Twitter. 
+
+In the following section we went up one level of abstraction. Here we discussed the techniques of analysis on a single tweet. Starting with data enrichment. This is the field of study where we try to give data more (machine-interpretable) meaning. We found that concept extraction is at the very basis of any enrichment technique and it is used to improve the performance of other algorithms. Because it is such a common technique, web services are available that can do this task. Next up was sentiment analysis. This is the labelling of a document according to its sentiment. From our literature it got clear that the performance of sentiment classifiers, even enhanced with emoticons, falls behind compared to topic classifiers. 
+
+The next section was again a higher level of abstraction. In this chapter we did not consider the data hidden in a single tweet, the focus was on a stream 
+of tweets and what information can be extracted from a stream of tweets. We discussed User Classification, which can be a useful feature to gather information 
+about people, their opinions and hobbies. These techniques can be used for predicting things people like such as their political view. Tag-based analysis is
+a set of techniques that allow researchers to find patterns within a set of tweets, based on the tagged content they contain. The two most common models
+were reviewed, being the linear-weighted hybrid model, and the pairwise interaction tensor factorisation. We discussed the 
+concept of event identification which can be separated in two problems (1) Separating event and non-event content and (2) Aligning Tweets with an Event. We presented solutions for these problems and shown that event identification can be a useful technique in practice. (e.g. It can be used to detect Earthquakes)
+
+Looking back we see that Twitter is a very useful source of information. Therefore the necessary research has been done on this topic already. Despites these efforts there is still a lot of room for improvement and new research. 
+\newpage
+\bibliographystyle{plain}
+\bibliography{bibdb}
+
+
+\end{document}
+
+
+
+
+
+
+
+
