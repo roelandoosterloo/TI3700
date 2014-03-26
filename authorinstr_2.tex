@@ -10,7 +10,7 @@
 
 %% begin document with title, author and affiliations
 
-\title{Seminarium TI 3700\\ Data Analysis on Twitter}
+\title{Seminarium TI 3700\\ Data Analysis on Twitter: An Overview}
 \author{A. Hambenne  \and
     O. Maas \and
     R. Oosterloo}
@@ -150,22 +150,19 @@ After all these approaches are used on the same dataset it appears that the vari
 
 
 \subsubsection{Classification Features}
-While classifying users people are trying to discriminate between users. To achieve this a number of featuresets is needed. In this section we will discuss some features, their accuracy and the way they can be used to discriminate. 
-\\\\
-\textbf{Linguistics}\\
-Linguistics can say a lot about the interests of a user. Furthermore it can be used to distinguish between different types of users. One way to classify a user using linguistics is done by using Prototipical Words(PW's). \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. (e.g. younger people will probably use terms like "lol" and "yolo" more than older users). To define prototipical words for i classes the propability that a user of class $c_i$ will use word $w$ needs to be calculated. Given n classes and some seed users $S_i$ this probability is calculated using the following formula: $proto(w, c_i) = \frac{|w, S_i|}{\sum_{j=1}^n |w, S_j|}$.  In a Twitter-context Prototipical Hashtags can be used in the same way which perform better to classify a user on Twitter than prototypical words. \cite{userclasst}
-\\\\
-\textbf{Interaction}\\
-Users interaction is used by Makazhanov \& Raﬁei to capture interactions between users and other accounts. \cite{pol} An interaction is a retweet or a reply. It is also possible to use friend accounts as a measurement in interaction between users.  A friend account of user $x$ is an account that is followed by user $y$. In the same way as prototypical words are calculated prototypical replies and retweets can be calculated to classify a user. (e.g. a democrat may tend to retweet a message from a democratic candidate) \cite{userclasst}
-\\\\
-\textbf{Interaction Profiles}\\
-Interaction Profiles are used to capture class-specific topics. Makazhanov \& Raﬁei use the following definition to get party specific terms for each party in an election: Given a set $C$ of candidates, we associate with each candidate $c \in C$ a document $d_c$ is modelled as a bag of words. Let $D = \{d_c| c \in C\}$ and for each party $p \in P$, $D_p = \{d_c | c $ is a member of $p\}$ \cite{pol}. To generate a Language Model (LM) divergence between the LM probability of a term in a party and the LM probability of all parties is used. With these probabilities for each term an importance score $I(t,p)$ is calculated to define the importance of term $t$ for party $p$. The higher the score the more it deviates from the normal election-tweets. \cite{pol}. To build the interaction profiles the top 100 terms for each party are included in a bag of words. 
-\\\\  
-\textbf{Tweeting Behavior}\\
-Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Features such as the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to Pennacchiotti \& Popescu these features are useful but not really discriminative. \cite{userclasst} 
-\\\\
-\textbf{Profile}\\
-Profile information can be helpful to bootstrap the classification of a user, but it should be used with care due to the amount of inconsistent, incorrect and sometimes bogus information (e.g an non-existent hometown). Research has shown that 80\% of the users provides a location and 48\% of the users provides a short bio. \cite{usermachine} It is was possible to extract a gender for 80\% of the users, but with a very low accuracy. Only in 0.1\% of the cases the researchers where able to extract an etnicity. The profile picture/avatar of Twitter users can be misleading in 20\% of the found profile pictures not the owner was in the picture was but another person such as a celebrity.  \cite{usermachine}
+While classifying users people are trying to discriminate between users. But to discriminate between users it is useful to know where to discriminate on. What are the best ways to classify a user? A lot of research has been done on classification In this section we will discuss some features, their accuracy and the way they can be used to classify a user. 
+
+Classifying users by the topic they talk about seems a natural idea. Linguistics can say a lot about the interests of a user. One way to classify a user using linguistics is done by using Prototypical Words(PW's). \cite{userclasst} PW's are words that are more used by users in class $A$ than users in class $B$. (e.g. younger people will probably use terms like "lol" and "yolo" more than older users). To define prototypical words for i classes the probability that a user of class $c_i$ will use word $w$ needs to be calculated. Given n classes and some seed users $S_i$ this probability is calculated using the following formula: $proto(w, c_i) = \frac{|w, S_i|}{\sum_{j=1}^n |w, S_j|}$.  In a Twitter-context Prototypical Hashtags can be used in the same way which perform better to classify a user on Twitter than prototypical words.
+
+Another way to classify a user can be the people they interact with. Users their interaction is used by Makazhanov \& Raﬁei to capture interactions between users and other accounts. \cite{pol} An interaction is a retweet or a reply. It is also possible to use friend accounts as a measurement in interaction between users.  A friend account of user $x$ is an account that is followed by user $y$. In the same way as prototypical words are calculated prototypical replies and retweets can be calculated to classify a user. (e.g. a democrat may tend to retweet a message from a democratic candidate) \cite{userclasst}
+
+Maybe it could be an idea to classify people on the terms they use. Interaction Profiles are used to capture class-specific topics. Makazhanov \& Raﬁei use the following definition to get party specific terms for each party in an election: Given a set $C$ of candidates, we associate with each candidate $c \in C$ a document $d_c$ is modelled as a bag of words. Let $D = \{d_c| c \in C\}$ and for each party $p \in P$, $D_p = \{d_c | c $ is a member of $p\}$ \cite{pol}. To generate a Language Model (LM) divergence between the LM probability of a term in a party and the LM probability of all parties is used. With these probabilities for each term an importance score $I(t,p)$ is calculated to define the importance of term $t$ for party $p$. The higher the score the more it deviates from the normal election-tweets. \cite{pol}. To build the interaction profiles the top 100 terms for each party are included in a bag of words. 
+
+In real life people are also classified on their hometown, their age and their gender. Can this be achieved on Twitter using the profile information.  Profile information can be helpful to bootstrap the classification of a user, but it should be used with care due to the amount of inconsistent, incorrect and sometimes bogus information (e.g an non-existent hometown). Research has shown that 80\% of the users provides a location and 48\% of the users provides a short bio. \cite{usermachine} It is was possible to extract a gender for 80\% of the users, but with a very low accuracy. Only in 0.1\% of the cases the researchers where able to extract an etnicity. The profile picture/avatar of Twitter users can be misleading in 20\% of the found profile pictures not the owner was in the picture was but another person such as a celebrity.  \cite{usermachine}
+
+A maybe strange, but useful way to classify users is their   Tweeting behavior is a set of characteristics which shows us the way a user interacts with Twitter. Features such as the average number of messages, the number of replies and the number of friends seems a good quantifier for classification. According to Pennacchiotti \& Popescu these features are useful but not really discriminative. \cite{userclasst} 
+
+
 
 \subsubsection{Usecase: Predicting Political Preferences}
 During election time it can be useful to predict the political preferences of a user. In Makazhanov \& Raﬁei's paper a solution to this problem is presented. As not all tweets from users reflect their political preference a preprocessing of data is done in order to filter the tweets. \cite{pol} To achieve this (political) hashtags in combination with Twitter activities is used. To know if a user mentions an account of an election candidate a number of these accounts are scraped semi-automaticall. This resulted in the collection of 181972 tweets about politics.\cite{pol}
