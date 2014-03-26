@@ -262,6 +262,7 @@ Event identification has two main problem. (1) separating the content and non-ev
 Twitter-environment (2) Aligning tweets about an event with their respective event. In this section we will discuss these two problems and present a solution for them.
 \\\\ 
 \textbf{Separation of Event and Non-event Content}\\
+
 Because not all tweets on Twitter are event content, a separation of Event and Non-event content is done prior of identifying events. To achieve this separation, Becker et al.  use an incremental clustering algorithm(ICA). ICA doesn't require an number of clusters before the execution of the algorithm. This is an useful feature in the constantly changing Twitter-environment. \cite{eventident} 
 
 After the clustering a number of features is used to distinguish between event and non-event clusters. The following features can be used to identify an event cluster. \cite{eventident} 
@@ -275,6 +276,7 @@ After the clustering a number of features is used to distinguish between event a
 With this list of features two event-classifiers are trained using two different techniques. The first classifier is trained using the "WEKA tookit"\footnote{http://www.cs.waikato.ac.nz/ml/weka/}, in the second classifier the  Naive-Bayes technique is used. The first classifier outperforms the second classifier in the separation of event and non-event clusters. \cite{eventident}
 \\\\
 \textbf{Aligning Tweets with an Event} \\
+
 On average thousands of tweets are sent every minute using Twitter(\footnote{https://blog.twitter.com/2013/new-tweets-per-second-record-and-how}) . One of the main challenges in Event Identification is the alignment of tweets with their respective event. Rowe \& Stankovic try to create an automated mapping solution for this problem using semantics. \cite{eventalign}
 
 
